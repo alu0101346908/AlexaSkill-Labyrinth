@@ -38,7 +38,7 @@ const NewWorldIntentHandler = {
             }
         }
         console.log(World);
-        const speakOutput = 'Respondiste ' + AnswerValue;
+        const speakOutput = 'Creando ' + AnswerValue;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
