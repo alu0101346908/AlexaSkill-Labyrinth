@@ -27,7 +27,7 @@ const NewWorldIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NewWorldIntent';
     },
     handle(handlerInput) {
-        const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Nuevo.value;
+        const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
         var World = [];
         if (AnswerValue === 'pequeño'){
             for (var i = 0; i < 4; i++) {
