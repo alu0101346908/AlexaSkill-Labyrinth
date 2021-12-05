@@ -26,7 +26,7 @@ const AnswerDirectionIntentHandler = {
     },
     handle(handlerInput) {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
-        const speakOutput = 'Respondiste' + AnswerValue;
+        const speakOutput = 'Respondiste ' + AnswerValue;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
