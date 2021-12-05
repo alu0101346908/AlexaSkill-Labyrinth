@@ -19,6 +19,8 @@ const LaunchRequestHandler = {
     }
 };
 
+const worldjson = require ('./world.js');
+const World = worldjson.World;
 
 
 const NewWorldIntentHandler = {
@@ -28,16 +30,9 @@ const NewWorldIntentHandler = {
     },
     handle(handlerInput) {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
-        var World = [];
         if (AnswerValue === 'pequeño'){
-            for (var i = 0; i < 4; i++) {
-                World.push([]);
-                for (var j = 0; j < 4; j++) {
-                    World[i].push(['0']);
-                }
-            }
+            var CurrentWorld = worldjson(4,4);
         }
-        console.log(World);
         const speakOutput = 'Creando ' + AnswerValue;
 
         return handlerInput.responseBuilder
