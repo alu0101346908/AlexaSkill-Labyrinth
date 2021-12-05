@@ -19,6 +19,38 @@ const LaunchRequestHandler = {
     }
 };
 
+
+
+const NewWorldIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NewWorldIntent';
+    },
+    handle(handlerInput) {
+        const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Nuevo.value;
+        var World = [];
+        if (AnswerValue === 'pequeño'){
+            for (var i = 0; i < 4; i++) {
+                World.push([]);
+                for (var j = 0; j < 4; j++) {
+                    World[i].push(['0']);
+                }
+            }
+        }
+        console.log(World);
+        const speakOutput = 'Respondiste ' + AnswerValue;
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+
+
+
+
 const AnswerDirectionIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
