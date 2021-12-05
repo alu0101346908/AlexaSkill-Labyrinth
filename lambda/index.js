@@ -19,17 +19,18 @@ const LaunchRequestHandler = {
     }
 };
 
-const HelloWorldIntentHandler = {
+const AnswerDirectionIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerDirectionsIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hello World!';
+        const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.numberSlot.value;
+        const speakOutput = 'Respondiste' + AnswerValue;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .reprompt(speakOutput)
             .getResponse();
     }
 };
@@ -144,7 +145,8 @@ const ErrorHandler = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        HelloWorldIntentHandler,
+        //HelloWorldIntentHandler,
+        
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
