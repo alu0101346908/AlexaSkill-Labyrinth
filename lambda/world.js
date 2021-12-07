@@ -1,3 +1,4 @@
+
 function World(i,j,size) {
     let Cells = [];
     for (let n = 0; n < i; n++) {
@@ -6,29 +7,21 @@ function World(i,j,size) {
             Cells[n].push(['0']);
         }
     }
-    this.cells = Cells;
-/*    if (size === 'pequeño'){
         let obstacles_percentage = 0.30;
-        let obstacles_number =
-    }
-    Math.random(0,16)
-    void Board::create_random_obstacle(float& obstacles_percentage) {
-        int row, col;
-        int obstacle_counter = 0;
-        srand(time(NULL));
-        int obstacles = (get_rows() * get_cols()) * (obstacles_percentage / 100);
-        int area = (get_rows() * get_cols());
-        // If number of obstacles are greater than the area of the board, 
-        // sets the maximum posible obstacles
-        obstacles >= area - 2 ? obstacles = area - 2 : obstacles;
-        while (obstacle_counter < obstacles) {
-          row = rand() % get_rows();
-          col = rand() % get_cols();
-          if (create_obstacle(row, col))
+        let obstacles_number = size * obstacles_percentage;
+        obstacles_number = toString(obstacles_number);
+        obstacles_number = parseInt(obstacles_number);
+        let obstacle_counter = 0;
+    while (obstacle_counter < obstacles_number){
+        let row = Math.random(0,3);
+        let col = Math.random(0,3);
+        if ((Cells[row][col] != 'J') && (Cells[row][col] != 'X') && (Cells[row][col] != 'O')){
+            Cells[row][col] = 'X';
             obstacle_counter++;
         }
     }
-    */
+    this.cells = Cells;
+    
 }
  
 // now we export the class, so other modules can create Cat objects

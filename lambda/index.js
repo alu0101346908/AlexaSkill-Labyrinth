@@ -10,7 +10,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
+        const speakOutput = 'Bienvenido a la prueba del laberinto. Prepara un desafío.';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -75,7 +75,7 @@ const HelpIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'You can say hello to me! How can I help?';
+        const speakOutput = 'Oigo tu súplica, ¿cómo puedo guiar tu camino?';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -91,7 +91,7 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'Goodbye!';
+        const speakOutput = 'Te has rendido ante el laberinto.';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -109,7 +109,7 @@ const FallbackIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Sorry, I don\'t know about that. Please try again.';
+        const speakOutput = 'Tu voz se pierde tras los muros. ¿Puedes repetir tus palabras?';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -143,7 +143,7 @@ const IntentReflectorHandler = {
     },
     handle(handlerInput) {
         const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speakOutput = `You just triggered ${intentName}`;
+        const speakOutput = `Has activado ${intentName}`;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -161,7 +161,7 @@ const ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        const speakOutput = 'Sorry, I had trouble doing what you asked. Please try again.';
+        const speakOutput = 'No he podido acatar tu orden. Si me lo pides de nuevo, volveré a intentarlo.';
         console.log(`~~~~ Error handled: ${JSON.stringify(error)}`);
 
         return handlerInput.responseBuilder
