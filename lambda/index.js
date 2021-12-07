@@ -28,7 +28,7 @@ const NewWorldIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NewWorldIntent';
     },
     handle(handlerInput) {
-        const worldjson = require ('./world');
+        const worldjson = require ('./world.js');
         const World = worldjson.World;
 
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
