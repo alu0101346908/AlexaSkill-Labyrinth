@@ -28,6 +28,7 @@ const NewWorldIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NewWorldIntent';
     },
     handle(handlerInput) {
+        import 
         const worldjson = require ('./world');
         const World = worldjson.World;
 
