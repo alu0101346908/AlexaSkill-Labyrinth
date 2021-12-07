@@ -27,5 +27,5 @@ function World(i,j,size) {
  
 // now we export the class, so other modules can create Cat objects
 module.exports = {
-    World
+    World:World
 }
