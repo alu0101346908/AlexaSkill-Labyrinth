@@ -33,14 +33,12 @@ const NewWorldIntentHandler = {
 
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
         let count = 0;
-        if (AnswerValue === 'pequeño'){
             var CurrentWorld = worldjson(4,4,'pequeño');
             for (let n = 0; n < 4; n++) {
                 for (let m = 0; m < 4; m++) {
                     count++;
                 }
             }
-        }
         let contador = count.toString();
         const speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas.';
 
