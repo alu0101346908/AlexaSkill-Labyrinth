@@ -90,6 +90,7 @@ const CancelAndStopIntentHandler = {
             && (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent'
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
+    
     handle(handlerInput) {
         const speakOutput = 'Te has rendido ante el laberinto.';
 
