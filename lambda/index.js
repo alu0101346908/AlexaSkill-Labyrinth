@@ -34,8 +34,8 @@ const NewWorldIntentHandler = {
         let count = 0;
         let countobstacle = 0;
             var CurrentWorld = worldmodule.World(4,4,'pequeño');
-            for (let n = 0; n < CurrentWorld.length(); n++) {
-                for (let m = 0; m < CurrentWorld[n].length(); m++) {
+            for (let n = 0; n < CurrentWorld.length; n++) {
+                for (let m = 0; m < CurrentWorld[n].length; m++) {
                     count++;
                     if (CurrentWorld[n][m] === ['X']){
                         countobstacle++;
