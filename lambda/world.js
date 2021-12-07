@@ -21,7 +21,7 @@ function World(i,j,size) {
             obstacle_counter++;
         }
     }
-    this.cells = Cells;
+    return Cells;
     
 }
  
