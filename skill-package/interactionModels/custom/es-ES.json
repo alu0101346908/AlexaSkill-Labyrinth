@@ -1,0 +1,72 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "test laberinto",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AnswerDirectionsIntent",
+          "slots": [
+            {
+              "name": "Direction",
+              "type": "AMAZON.RelativePosition"
+            }
+          ],
+          "samples": [
+            "muevete hacia {Direction}"
+          ]
+        },
+        {
+          "name": "NewWorldIntent",
+          "slots": [
+            {
+              "name": "Size",
+              "type": "WorldSize"
+            }
+          ],
+          "samples": [
+            "crea mundo {Size}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "normal"
+              }
+            },
+            {
+              "name": {
+                "value": "grande"
+              }
+            },
+            {
+              "name": {
+                "value": "pequeño"
+              }
+            }
+          ],
+          "name": "WorldSize"
+        }
+      ]
+    }
+  },
+  "version": "5"
+}
