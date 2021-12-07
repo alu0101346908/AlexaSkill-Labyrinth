@@ -28,13 +28,12 @@ const NewWorldIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NewWorldIntent';
     },
     handle(handlerInput) {
-        const worldjson = require ('./world.js');
-        const World = worldjson.World;
+        const worldmodule = require ("./world.js");
 
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
         let count = 0;
         let countobstacle = 0;
-            var CurrentWorld = World(4,4,'pequeño');
+            var CurrentWorld = worldmodule.World(4,4,'pequeño');
             for (let n = 0; n < CurrentWorld.length(); n++) {
                 for (let m = 0; m < CurrentWorld[n].length(); m++) {
                     count++;
