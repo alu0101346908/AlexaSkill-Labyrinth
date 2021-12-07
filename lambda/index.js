@@ -44,7 +44,7 @@ const NewWorldIntentHandler = {
                 }
             }
         let contador = count.toString();
-        const speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas.';
+        const speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
