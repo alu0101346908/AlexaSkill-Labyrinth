@@ -38,9 +38,9 @@ const NewWorldIntentHandler = {
             for (let n = 0; n < CurrentWorld.length(); n++) {
                 for (let m = 0; m < CurrentWorld[n].length(); m++) {
                     count++;
-                    /*if (CurrentWorld[n][m] === 'X'){
+                    if (CurrentWorld[n][m] === ['X']){
                         countobstacle++;
-                    }*/
+                    }
                 }
             }
         let contador = count.toString();
