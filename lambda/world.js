@@ -7,16 +7,19 @@ function World(i,j,size) {
             Cells[n].push(['0']);
         }
     }
+    let obstacle_proportion;
     switch (size) {
-        case "pequeño":
+        case 'pequeño':
             let obstacle_proportion = 16
             break;
-        case "mediano":
+        case 'mediano':
             let obstacle_proportion = 36
             break;
-        case "grande":
+        case 'grande':
             let obstacle_proportion = 64
             break;
+        default:
+            return;
     }
     let obstacles_percentage = 0.30;
     let obstacles_number = obstacle_proportion * obstacles_percentage;

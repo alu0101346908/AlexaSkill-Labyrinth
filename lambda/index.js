@@ -33,17 +33,18 @@ const NewWorldIntentHandler = {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
         let count = 0;
         let countobstacle = 0;
+        CurrentWorld;
         switch (AnswerValue){
             case 'pequeño':
-                var CurrentWorld = worldmodule.World(4,4, "pequeño");
+                CurrentWorld = worldmodule.World(4,4, "pequeño");
                 break;
 
             case 'mediano':
-                var CurrentWorld = worldmodule.World(6,6, "mediano");
+                CurrentWorld = worldmodule.World(6,6, "mediano");
                 break;
 
             case 'grande':
-                var CurrentWorld = worldmodule.World(8,8, "grande");
+                CurrentWorld = worldmodule.World(8,8, "grande");
                 break;
 
             default:
