@@ -30,7 +30,7 @@ function World(i,j,size) {
         row = Math.round(row);
         let col = Math.random()*3;
         col = Math.round(col);
-        if ((Cells[row][col] != 'J') && (Cells[row][col] != 'X') && (Cells[row][col] != 'O')){
+        if ((Cells[row][col] !== 'J') && (Cells[row][col] !== 'X') && (Cells[row][col] !== 'O')){
             Cells[row][col] = ['X'];
             obstacle_counter++;
         }
