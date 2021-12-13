@@ -48,6 +48,10 @@ const NewWorldIntentHandler = {
 
             default:
                 const speakOutput = 'Tamaño de mundo no soportado, prueba con pequeño, mediano y grande';
+                return handlerInput.responseBuilder
+                    .speak(speakOutput)
+                    .reprompt(speakOutput)
+                    .getResponse();
                 break;
         }
         for (let n = 0; n < CurrentWorld.length; n++) {
