@@ -31,7 +31,7 @@ const NewWorldIntentHandler = {
     },
     handle(handlerInput) {
         if (CurrentWorld !== null && tryagain == false){
-            const speakOutput = 'Ya existe un mundo, si quieres reiniciar di reinicia mundo, si quieres crear uno nuevo vuelve a decir crear mundo';
+            const speakOutput = 'Ya existe un mundo, si quieres reiniciar di reinicia mundo, si quieres crear uno nuevo vuelve a decir crea mundo';
             tryagain = true;
             return handlerInput.responseBuilder
                 .speak(speakOutput)
