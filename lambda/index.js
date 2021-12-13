@@ -19,7 +19,8 @@ const LaunchRequestHandler = {
     }
 };
 
-let CurrentWorld;
+let CurrentWorld = null;
+let tryagain = false;
 
 
 const NewWorldIntentHandler = {
@@ -29,6 +30,14 @@ const NewWorldIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NewWorldIntent';
     },
     handle(handlerInput) {
+        if (CurrentWorld !== null && tryagain == false){
+            const speakOutput = 'Ya existe un mundo, si quieres reiniciar di reinicia mundo, si quieres crear uno nuevo vuelve a decir crear mundo';
+            tryagain = true;
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
         const worldmodule = require ("./world.js");
 
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
