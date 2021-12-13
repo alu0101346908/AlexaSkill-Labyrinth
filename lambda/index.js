@@ -34,15 +34,15 @@ const NewWorldIntentHandler = {
         let count = 0;
         let countobstacle = 0;
         switch (AnswerValue){
-            case "pequeño":
+            case 'pequeño':
                 var CurrentWorld = worldmodule.World(4,4, "pequeño");
                 break;
 
-            case "mediano":
+            case 'mediano':
                 var CurrentWorld = worldmodule.World(6,6, "mediano");
                 break;
 
-            case "grande":
+            case 'grande':
                 var CurrentWorld = worldmodule.World(8,8, "grande");
                 break;
 
