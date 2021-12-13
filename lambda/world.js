@@ -8,15 +8,19 @@ function World(i,j,size) {
         }
     }
     let obstacle_proportion;
+    let random_proportion;
     switch (size) {
         case 'pequeño':
-            obstacle_proportion = 16
+            obstacle_proportion = 16;
+            random_proportion = 3;
             break;
         case 'mediano':
-            obstacle_proportion = 36
+            obstacle_proportion = 36;
+            random_proportion = 5;
             break;
         case 'grande':
-            obstacle_proportion = 64
+            obstacle_proportion = 64;
+            random_proportion = 7;
             break;
         default:
             return;
@@ -26,11 +30,11 @@ function World(i,j,size) {
     obstacles_number = Math.round(obstacles_number);
     let obstacle_counter = 0;
     while (obstacle_counter < obstacles_number){
-        let row = Math.random()*3;
+        let row = Math.random()*random_proportion;
         row = Math.round(row);
-        let col = Math.random()*3;
+        let col = Math.random()*random_proportion;
         col = Math.round(col);
-        if ((Cells[row][col] !== ['J']) && (Cells[row][col] !== ['X']) && (Cells[row][col] !== ['O'])){
+        if ((Cells[row][col] != 'J') && (Cells[row][col] != 'X') && (Cells[row][col] != 'O')){
             Cells[row][col] = ['X'];
             obstacle_counter++;
         }
