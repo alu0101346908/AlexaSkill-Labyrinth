@@ -10,13 +10,13 @@ function World(i,j,size) {
     let obstacle_proportion;
     switch (size) {
         case 'pequeño':
-            let obstacle_proportion = 16
+            obstacle_proportion = 16
             break;
         case 'mediano':
-            let obstacle_proportion = 36
+            obstacle_proportion = 36
             break;
         case 'grande':
-            let obstacle_proportion = 64
+            obstacle_proportion = 64
             break;
         default:
             return;
