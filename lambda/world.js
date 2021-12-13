@@ -7,10 +7,21 @@ function World(i,j,size) {
             Cells[n].push(['0']);
         }
     }
-        let obstacles_percentage = 0.30;
-        let obstacles_number = 16 * obstacles_percentage;
-        obstacles_number = Math.round(obstacles_number);
-        let obstacle_counter = 0;
+    switch (size) {
+        case "pequeño":
+            let obstacle_proportion = 16
+            break;
+        case "mediano":
+            let obstacle_proportion = 36
+            break;
+        case "grande":
+            let obstacle_proportion = 64
+            break;
+    }
+    let obstacles_percentage = 0.30;
+    let obstacles_number = obstacle_proportion * obstacles_percentage;
+    obstacles_number = Math.round(obstacles_number);
+    let obstacle_counter = 0;
     while (obstacle_counter < obstacles_number){
         let row = Math.random()*3;
         row = Math.round(row);

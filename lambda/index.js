@@ -33,15 +33,31 @@ const NewWorldIntentHandler = {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
         let count = 0;
         let countobstacle = 0;
-            var CurrentWorld = worldmodule.World(4,4,'pequeño');
-            for (let n = 0; n < CurrentWorld.length; n++) {
-                for (let m = 0; m < CurrentWorld[n].length; m++) {
-                    count++;
-                    if (CurrentWorld[n][m] == 'X'){
-                        countobstacle++;
-                    }
+        switch (AnswerValue){
+            case "pequeño":
+                var CurrentWorld = worldmodule.World(4,4, "pequeño");
+                break;
+
+            case "mediano":
+                var CurrentWorld = worldmodule.World(6,6, "mediano");
+                break;
+
+            case "grande":
+                var CurrentWorld = worldmodule.World(8,8, "grande");
+                break;
+
+            default:
+                const speakOutput = 'Tamaño de mundo no soportado, prueba con pequeño, mediano y grande';
+                break;
+        }
+        for (let n = 0; n < CurrentWorld.length; n++) {
+            for (let m = 0; m < CurrentWorld[n].length; m++) {
+                count++;
+                if (CurrentWorld[n][m] == 'X'){
+                    countobstacle++;
                 }
             }
+        }
         let contador = count.toString();
         const speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
 
