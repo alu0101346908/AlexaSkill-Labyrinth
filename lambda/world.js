@@ -64,7 +64,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     }
     switch (AnswerValue){
         case 'derecha':
-            if (player_position_package.player_orientation == 'S' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
+            if (player_position_package.player_orientation == 'S' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
@@ -80,7 +80,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 player_position_package.player_orientation = 'S';
                 SpeakOutput = "aaaa";
             }
-            if (player_position_package.player_orientation == 'O' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
+            if (player_position_package.player_orientation == 'O' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
                 CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
