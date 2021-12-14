@@ -23,7 +23,7 @@ let CurrentWorld = null;
 let tryagain = false;
 let player_pointer_x = 0;
 let player_pointer_y = 0;
-let player_orientation = 'S';
+let player_orientation = 'E';
 let player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
 let worldmodule = require ("./world.js");
 
