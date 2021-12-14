@@ -66,7 +66,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
             }
-            if (player_position_package.player_orientation === 'E' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] !== 'X'){
+            if (player_position_package.player_orientation == 'E' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
                 CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
