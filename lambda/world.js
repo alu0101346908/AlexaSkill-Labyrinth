@@ -43,6 +43,33 @@ function World(i,j,size) {
     return Cells;
     
 }
+
+function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
+    let SpeakOutput;
+    switch (AnswerValue){
+        case 'derecha':
+            if (player_position_package.player_orientation == 'S' && player_position_package.player_pointer_y - 1 >= 0){
+                CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
+            }
+            if (player_position_package.player_orientation == 'N' && player_position_package.player_pointer_y + 1 <= CurrentWorld.length()){
+                CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
+            }
+            if (player_position_package.player_orientation == 'E' && player_position_package.player_pointer_x - 1 >= 0){
+                CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
+            }
+            if (player_position_package.player_orientation == 'O' && player_position_package.player_pointer_x + 1 <= CurrentWorld[0].length()){
+                CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
+            }
+        case 'izquierda':
+        
+        case 'adelante':
+        case 'delante':
+        case 'alante':
+            
+        case 'atras':
+    } 
+    return {CurrentWorld, player_position_package};
+}
  
 // now we export the class, so other modules can create Cat objects
 module.exports = {
