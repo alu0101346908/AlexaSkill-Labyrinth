@@ -32,7 +32,7 @@ function World(i,j,size) {
     let obstacle_counter = 0;
     while (obstacle_counter < obstacles_number){
         let row = Math.random()*random_proportion;
-        row = Math.round(row);
+        row = Math.round(row); 
         let col = Math.random()*random_proportion;
         col = Math.round(col);
         if ((Cells[row][col] != 'J') && (Cells[row][col] != 'X') && (Cells[row][col] != 'O')){
@@ -58,9 +58,9 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
             }
-            if (player_position_package.player_orientation == 'E' && player_position_package.player_pointer_y + 1 <= CurrentWorld[0].length() && CurrentWorld[player_position_package.player_pointer_y + 1][player_position_package.player_pointer_x] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_y + 1][player_position_package.player_pointer_x].push('J');
-                player_position_package.player_pointer_y += 1;
+            if (player_position_package.player_orientation == 'E' && player_position_package.player_pointer_x + 1 <= CurrentWorld[0].length() && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_x] != 'X'){
+                CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
+                player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
             }
             if (player_position_package.player_orientation == 'O' && player_position_package.player_pointer_x - 1 >= 0 && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
