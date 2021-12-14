@@ -100,7 +100,7 @@ const AnswerDirectionIntentHandler = {
         player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
         //let {CurrentWorld, player_position_package} = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
         
-        //speakOutput = speakOutput + ' X:'+ player_position_package.player_pointer_x.toString() + ' Y:' + player_position_package.player_pointer_y.toString() + ' Orientacion: ' + player_position_package.player_orientation;
+        speakOutput = speakOutput + ' X:'+ player_position_package.player_pointer_x.toString() + ' Y:' + player_position_package.player_pointer_y.toString() + ' Orientacion: ' + player_position_package.player_orientation.toString();
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
