@@ -21,6 +21,10 @@ const LaunchRequestHandler = {
 
 let CurrentWorld = null;
 let tryagain = false;
+let player_pointer_x = 0;
+let player_pointer_y = 0;
+let player_orientation = 'S'
+let player_position_package;
 
 
 const NewWorldIntentHandler = {
@@ -94,6 +98,8 @@ const AnswerDirectionIntentHandler = {
     handle(handlerInput) {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         const speakOutput = 'Respondiste ' + AnswerValue;
+        player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
+        worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
