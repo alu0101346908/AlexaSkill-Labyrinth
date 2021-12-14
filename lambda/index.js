@@ -23,8 +23,9 @@ let CurrentWorld = null;
 let tryagain = false;
 let player_pointer_x = 0;
 let player_pointer_y = 0;
-let player_orientation = 'S'
-let player_position_package;
+let player_orientation = 'S';
+var player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
+let worldmodule = require ("./world.js");
 
 
 const NewWorldIntentHandler = {
@@ -42,8 +43,6 @@ const NewWorldIntentHandler = {
                 .reprompt(speakOutput)
                 .getResponse();
         }
-        const worldmodule = require ("./world.js");
-
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
         let count = 0;
         let countobstacle = 0;
@@ -99,7 +98,7 @@ const AnswerDirectionIntentHandler = {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         const speakOutput = 'Respondiste ' + AnswerValue;
         player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
-        worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
+        const [CurrentWorld, player_position_package] = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
