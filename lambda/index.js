@@ -97,7 +97,7 @@ const AnswerDirectionIntentHandler = {
     handle(handlerInput) {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         let speakOutput = 'Respondiste ' + AnswerValue;
-        player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
+        //player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
         let wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
         CurrentWorld = wrapper[0];
         player_position_package = wrapper[1];
