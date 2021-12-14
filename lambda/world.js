@@ -25,6 +25,7 @@ function World(i,j,size) {
         default:
             return;
     }
+    Cells[0][0] = ['J'];
     let obstacles_percentage = 0.30;
     let obstacles_number = obstacle_proportion * obstacles_percentage;
     obstacles_number = Math.round(obstacles_number);
