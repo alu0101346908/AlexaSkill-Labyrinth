@@ -28,18 +28,32 @@ function World(i,j) {
             return;
     }*/
     Cells[0][0] = ['J'];
-    let obstacles_percentage = 0.30;
-    let obstacles_number = obstacle_proportion * obstacles_percentage;
-    obstacles_number = Math.round(obstacles_number);
-    let obstacle_counter = 0;
-    while (obstacle_counter < obstacles_number){
-        let row = Math.random()*random_proportion;
-        row = Math.round(row); 
-        let col = Math.random()*random_proportion;
-        col = Math.round(col);
-        if ((Cells[row][col] != 'J') && (Cells[row][col] != 'X') && (Cells[row][col] != 'O')){
-            Cells[row][col] = ['X'];
-            obstacle_counter++;
+    Cells[i][j] = ['F'];
+    let CellsBackup = Cells;
+    let valid_world = false;
+    while (valid_world == false){
+        let obstacles_percentage = 0.30;
+        let obstacles_number = obstacle_proportion * obstacles_percentage;
+        obstacles_number = Math.round(obstacles_number);
+        let obstacle_counter = 0;
+        while (obstacle_counter < obstacles_number){
+            let row = Math.random()*random_proportion;
+            row = Math.round(row); 
+            let col = Math.random()*random_proportion;
+            col = Math.round(col);
+            if ((Cells[row][col] != 'J') && (Cells[row][col] != 'X') && (Cells[row][col] != 'O') && (Cells[row][col] != 'F')){
+                Cells[row][col] = ['X'];
+                obstacle_counter++;
+            }
+        }
+        valid_world == true;
+        if (Cells[0][1] == 'X' && Cells[1][0] == 'X' && Cells[1][1] == 'X'){
+            valid_world == false
+            Cells = CellsBackup;
+        }
+        else if (Cells[i][j-1] == 'X' && Cells[i-1][j-1] == 'X' && Cells[i-1][j] == 'X') {
+            valid_world == false
+            Cells = CellsBackup;
         }
     }
     return Cells;
