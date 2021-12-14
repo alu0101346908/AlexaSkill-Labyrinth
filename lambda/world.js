@@ -1,5 +1,5 @@
 
-function World(i,j,size) {
+function World(i,j) {
     let Cells = [];
     for (let n = 0; n < i; n++) {
         Cells.push([]);
@@ -9,7 +9,9 @@ function World(i,j,size) {
     }
     let obstacle_proportion;
     let random_proportion;
-    switch (size) {
+    obstacle_proportion = i * j;
+    random_proportion = i-1;
+    /*switch (size) {
         case 'pequeño':
             obstacle_proportion = 16;
             random_proportion = 3;
@@ -24,7 +26,7 @@ function World(i,j,size) {
             break;
         default:
             return;
-    }
+    }*/
     Cells[0][0] = ['J'];
     let obstacles_percentage = 0.30;
     let obstacles_number = obstacle_proportion * obstacles_percentage;
