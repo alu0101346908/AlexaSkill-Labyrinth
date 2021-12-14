@@ -46,28 +46,37 @@ function World(i,j,size) {
 
 function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     let SpeakOutput;
+    let outofbounds_x = false;
+    let outofbounds_y = false;
+    if (player_position_package.player_pointer_y - 1 < 0 || player_position_package.player_pointer_y + 1 > CurrentWorld[0].length()){
+        outofbounds_y = true;
+    }
+    if (player_position_package.player_pointer_x - 1 < 0 || player_position_package.player_pointer_x + 1 > CurrentWorld.length()){
+        outofbounds_x = true;
+    }
     switch (AnswerValue){
         case 'derecha':
-            if (player_position_package.player_orientation == 'S' && player_position_package.player_pointer_y - 1 >= 0 && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
+            if (player_position_package.player_orientation == 'S' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
             }
-            if (player_position_package.player_orientation == 'N' && player_position_package.player_pointer_y + 1 <= CurrentWorld.length() && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
+            if (player_position_package.player_orientation == 'N' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
             }
-            if (player_position_package.player_orientation == 'E' && player_position_package.player_pointer_x + 1 <= CurrentWorld[0].length() && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
+            if (player_position_package.player_orientation == 'E' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
                 CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
             }
-            if (player_position_package.player_orientation == 'O' && player_position_package.player_pointer_x - 1 >= 0 && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
+            if (player_position_package.player_orientation == 'O' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
                 CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
             }
+            break;
         case 'izquierda':
         
         case 'adelante':
