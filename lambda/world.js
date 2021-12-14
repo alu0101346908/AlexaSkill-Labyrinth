@@ -85,7 +85,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
             }
-            SpeakOutput = "eeeee";
+            SpeakOutput = SpeakOutput+"eeeee";
             break;
         case 'izquierda':
         
