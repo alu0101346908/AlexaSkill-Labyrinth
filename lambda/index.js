@@ -27,6 +27,10 @@ let player_orientation = 'E';
 let player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
 let worldmodule = require ("./world.js");
 
+let checkpoint_wrapper;
+
+let inventory_wrapper;
+
 
 const NewWorldIntentHandler = {
 
@@ -112,7 +116,7 @@ const AnswerDirectionIntentHandler = {
 const InventoryIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerDirectionsIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'InventoryIntent';
     },
     handle(handlerInput) {
         
@@ -128,7 +132,7 @@ const InventoryIntentHandler = {
 const PutCheckpointIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerDirectionsIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PutCheckpointIntent';
     },
     handle(handlerInput) {
 
@@ -144,7 +148,7 @@ const PutCheckpointIntentHandler = {
 const ReturnToCheckpointIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerDirectionsIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ReturnToCheckpointIntent';
     },
     handle(handlerInput) {
 
@@ -160,7 +164,7 @@ const ReturnToCheckpointIntentHandler = {
 const UseObjectIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerDirectionsIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'UseObjectIntent';
     },
     handle(handlerInput) {
 
@@ -176,7 +180,7 @@ const UseObjectIntentHandler = {
 const PickObjectIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerDirectionsIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PickObjectIntent';
     },
     handle(handlerInput) {
         
@@ -193,7 +197,7 @@ const PickObjectIntentHandler = {
 const SituationIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerDirectionsIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SituationIntent';
     },
     handle(handlerInput) {
 
