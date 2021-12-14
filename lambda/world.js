@@ -48,7 +48,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     let SpeakOutput;
     let outofbounds_x = false;
     let outofbounds_y = false;
-   /* let outofbounds_y_0 = false;
+    let outofbounds_y_0 = false;
     let outofbounds_x_0 = false;
     if (player_position_package.player_pointer_y + 1 > CurrentWorld[0].length()){
         outofbounds_y = true;
@@ -61,7 +61,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     }
     if (player_position_package.player_pointer_y - 1 < 0){
         outofbounds_y_0 = true;
-    }*/
+    }
     switch (AnswerValue){
         case 'derecha':
             /*if (player_position_package.player_orientation == 'S' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
