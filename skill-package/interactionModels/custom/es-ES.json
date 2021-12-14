@@ -28,6 +28,10 @@
             }
           ],
           "samples": [
+            "moverse {Direction}",
+            "muevete {Direction}",
+            "mueve {Direction}",
+            "deplazate hacia {Direction}",
             "muevete hacia {Direction}"
           ]
         },
@@ -68,5 +72,5 @@
       ]
     }
   },
-  "version": "5"
+  "version": "6"
 }
