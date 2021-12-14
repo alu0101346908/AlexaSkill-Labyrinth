@@ -48,11 +48,19 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     let SpeakOutput;
     let outofbounds_x = false;
     let outofbounds_y = false;
-    if (player_position_package.player_pointer_y - 1 < 0 || player_position_package.player_pointer_y + 1 > CurrentWorld[0].length()){
+    let outofbounds_y_0 = false;
+    let outofbounds_x_0 = false;
+    if (player_position_package.player_pointer_y + 1 > CurrentWorld[0].length()){
         outofbounds_y = true;
     }
-    if (player_position_package.player_pointer_x - 1 < 0 || player_position_package.player_pointer_x + 1 > CurrentWorld.length()){
+    if (player_position_package.player_pointer_x - 1 < 0){
+        outofbounds_x_0 = true;
+    }
+    if (player_position_package.player_pointer_x + 1 > CurrentWorld.length()){
         outofbounds_x = true;
+    }
+    if (player_position_package.player_pointer_y - 1 < 0){
+        outofbounds_y_0 = true;
     }
     switch (AnswerValue){
         case 'derecha':
