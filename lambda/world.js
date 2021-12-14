@@ -79,7 +79,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     return {CurrentWorld, player_position_package};
 }
  
-// now we export the class, so other modules can create Cat objects
 module.exports = {
-    World:World
+    World: World,
+    ManageDirection: ManageDirection
 }
