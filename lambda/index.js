@@ -101,6 +101,7 @@ const AnswerDirectionIntentHandler = {
         let wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
         CurrentWorld = wrapper[0];
         player_position_package = wrapper[1];
+        speakOutput = speakOutput + wrapper[2];
         
         speakOutput = speakOutput + ' X:'+ player_position_package.player_pointer_x.toString() + ' Y:' + player_position_package.player_pointer_y.toString() + ' Orientacion: ' + player_position_package.player_orientation.toString();
 
