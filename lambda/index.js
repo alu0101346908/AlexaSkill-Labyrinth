@@ -149,6 +149,7 @@ const ReturnToCheckpointIntentHandler = {
     handle(handlerInput) {
 
         // CODIGO
+        
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
