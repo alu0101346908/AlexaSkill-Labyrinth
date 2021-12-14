@@ -50,13 +50,13 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     let outofbounds_y = false;
     let outofbounds_y_0 = false;
     let outofbounds_x_0 = false;
-    if (player_position_package.player_pointer_y + 1 > CurrentWorld[0].length{
+    if (player_position_package.player_pointer_y + 1 > CurrentWorld[0].length){
         outofbounds_y = true;
     }
     if (player_position_package.player_pointer_x - 1 < 0){
         outofbounds_x_0 = true;
     }
-    if (player_position_package.player_pointer_x + 1 > CurrentWorld.length{
+    if (player_position_package.player_pointer_x + 1 > CurrentWorld.length){
         outofbounds_x = true;
     }
     if (player_position_package.player_pointer_y - 1 < 0){
