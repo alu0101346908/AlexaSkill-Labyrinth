@@ -70,6 +70,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
+                SpeakOutput = "aaaa";
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
                 CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
@@ -85,7 +86,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
             
         case 'atras':
     } 
-    return [CurrentWorld, player_position_package];
+    return [CurrentWorld, player_position_package, SpeakOutput];
 }
  
 module.exports = {
