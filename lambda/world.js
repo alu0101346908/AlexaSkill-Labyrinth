@@ -85,7 +85,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
             
         case 'atras':
     } 
-    return [CurrentWorld, player_position_package];
+    return player_position_package;
 }
  
 module.exports = {
