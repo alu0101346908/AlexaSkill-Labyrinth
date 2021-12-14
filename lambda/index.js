@@ -86,9 +86,6 @@ const NewWorldIntentHandler = {
 };
 
 
-
-
-
 const AnswerDirectionIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -111,7 +108,6 @@ const AnswerDirectionIntentHandler = {
             .getResponse();
     }
 };
-
 
 const InventoryIntentHandler = {
     canHandle(handlerInput) {
