@@ -98,7 +98,9 @@ const AnswerDirectionIntentHandler = {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         let speakOutput = 'Respondiste ' + AnswerValue;
         player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
-        let {CurrentWorld, player_position_package} = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
+        let wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
+        CurrentWorld = wrapper.CurrentWorld;
+        player_position_package = wrapper.player_position_package;
         
         speakOutput = speakOutput + ' X:'+ player_position_package.player_pointer_x.toString() + ' Y:' + player_position_package.player_pointer_y.toString() + ' Orientacion: ' + player_position_package.player_orientation.toString();
 
