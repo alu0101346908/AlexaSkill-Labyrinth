@@ -32,7 +32,7 @@ function World(i,j) {
     let CellsBackup = Cells;
     let valid_world = true;
     while (valid_world){
-        let obstacles_percentage = 0.30;
+        let obstacles_percentage = 0.20;
         let obstacles_number = obstacle_proportion * obstacles_percentage;
         obstacles_number = Math.round(obstacles_number);
         let obstacle_counter = 0;
