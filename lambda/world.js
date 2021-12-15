@@ -27,7 +27,7 @@ function World(i,j) {
         default:
             return;
     }*/
-    Cells[0][0] = ['J'];
+    Cells[0][0] = ['I'];
     Cells[i-1][j-1] = ['F'];
     let CellsBackup = Cells;
     let valid_world = true;
@@ -41,7 +41,7 @@ function World(i,j) {
             row = Math.round(row); 
             let col = Math.random()*random_proportion;
             col = Math.round(col);
-            if ((Cells[row][col] != 'J') && (Cells[row][col] != 'X') && (Cells[row][col] != 'O') && (Cells[row][col] != 'F')){
+            if ((Cells[row][col] != 'I') && (Cells[row][col] != 'X') && (Cells[row][col] != 'O') && (Cells[row][col] != 'F')){
                 Cells[row][col] = ['X'];
                 obstacle_counter++;
             }
@@ -81,44 +81,44 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     switch (AnswerValue){
         case 'derecha':
             if (player_position_package.player_orientation == 'S' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
             }
             break;
         case 'izquierda':
             if (player_position_package.player_orientation == 'S' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
             }
@@ -127,22 +127,22 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
         case 'delante':
         case 'alante':
             if (player_position_package.player_orientation == 'S' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'N';
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
             }
@@ -150,22 +150,22 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
             
         case 'atras':
             if (player_position_package.player_orientation == 'S' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
-                CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
+                //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
             }
@@ -232,6 +232,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
         case 'O':
             symbol = "hacha"
         break;
+        
         case 'F':
             symbol = "salida"
         break;
