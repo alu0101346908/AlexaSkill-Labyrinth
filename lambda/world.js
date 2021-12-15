@@ -47,14 +47,14 @@ function World(i,j) {
             }
         }
         valid_world == true;
-        if (Cells[0][1] == 'X' && Cells[1][0] == 'X' && Cells[1][1] == 'X'){
+        /*if (Cells[0][1] == 'X' && Cells[1][0] == 'X' && Cells[1][1] == 'X'){
             valid_world == false
             Cells = CellsBackup;
         }
         else if (Cells[i-1][j-2] == 'X' && Cells[i-2][j-2] == 'X' && Cells[i-2][j-1] == 'X') {
             valid_world == false
             Cells = CellsBackup;
-        }
+        }*/
     }
     return Cells;
     
