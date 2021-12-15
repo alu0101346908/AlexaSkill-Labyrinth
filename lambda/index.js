@@ -122,7 +122,6 @@ const PutCheckpointIntentHandler = {
     },
     handle(handlerInput) {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
-        // CODIGO
         let NewCheckPoint = playermodule.Checkpoint(AnswerValue, player_position_package.player_pointer_x, player_position_package.player_pointer_y);
         checkpoint_wrapper.push(NewCheckPoint);
         const speakOutput = 'Se ha creado un checkpoint llamado ' + NewCheckPoint.name + " en la posicion x:" + player_position_package.player_pointer_x.toString() + " y en la posicion y:" + player_position_package.player_pointer_y.toString() + ".Tienes " + checkpoint_wrapper.length + " checkpoints";
@@ -155,7 +154,6 @@ const ReturnToCheckpointIntentHandler = {
         else {
             speakOutput = "No se ha encontrado el checkpoint llamado " + AnswerValue;
         }
-        // CODIGO
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -169,7 +167,7 @@ const InventoryIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'InventoryIntent';
     },
     handle(handlerInput) {
-        
+        const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
         // CODIGO
         let speakOutput;
         return handlerInput.responseBuilder
@@ -219,8 +217,10 @@ const SituationIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SituationIntent';
     },
     handle(handlerInput) {
+        let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
+        let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
+        
 
-        // CODIGO
         let speakOutput;
         return handlerInput.responseBuilder
             .speak(speakOutput)
