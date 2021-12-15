@@ -199,9 +199,9 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
             else left = 'X';
             break;
         case 'O':
-            if (x-1 >= 0) left = CurrentWorld[x-1][y];
+            if (x+1 >= 0) left = CurrentWorld[x-1][y];
             else left = 'X';
-            if (x+1 < CurrentWorld.length) right = CurrentWorld[x+1][y];
+            if (x-1 < CurrentWorld.length) right = CurrentWorld[x+1][y];
             else right = 'X';
             if (y-1 >= 0) front = CurrentWorld[x][y-1];
             else front = 'X';
@@ -209,9 +209,9 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
             else behind = 'X';
             break;
         case 'E':
-            if (x-1 >= 0) right = CurrentWorld[x-1][y];
+            if (x+1 >= 0) right = CurrentWorld[x-1][y];
             else right = 'X';
-            if (x+1 < CurrentWorld.length) left = CurrentWorld[x+1][y];
+            if (x-1 < CurrentWorld.length) left = CurrentWorld[x+1][y];
             else left = 'X';
             if (y-1 >= 0) behind = CurrentWorld[x][y-1];
             else behind = 'X';
