@@ -181,11 +181,11 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
         case 'N':
             if (x-1 > 0) behind = CurrentWorld[x-1][y];
             else behind = 'X';
-            if (x+1 < CurrentWorld.length) front = CurrentWorld[x+1][y][0];
+            if (x+1 < CurrentWorld.length) front = CurrentWorld[x+1][y];
             else front = 'X';
             if (y-1 > 0) left = CurrentWorld[x][y-1];
             else left = 'X';
-            if (y+1 < CurrentWorld.length) right = CurrentWorld[x][y+1][0];
+            if (y+1 < CurrentWorld.length) right = CurrentWorld[x][y+1];
             else right = 'X';
             break;    
         case 'S':
