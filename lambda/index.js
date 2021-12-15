@@ -87,6 +87,9 @@ const NewWorldIntentHandler = {
         }
         let contador = count.toString();
         const speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
+                let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
+        let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
+        speakOutput += + '.' + "A tu derecha tienes un" + worldmodule.SymbolToString(right) + " delante un" + worldmodule.SymbolToString(front) + " a tu izquierda un" + worldmodule.SymbolToString(left) + " y detras un" + worldmodule.SymbolToString(behind)
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
