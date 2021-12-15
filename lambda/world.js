@@ -173,7 +173,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     } 
     return [CurrentWorld, player_position_package];
 }
- function surroundings(CurrentWorld, player){
+ function Surroundings(CurrentWorld, player){
         let left, right, front, behind;
         let x = player.player_pointer_x;
         let y = player.player_pointer_y;
@@ -209,5 +209,6 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
 
 module.exports = {
     World: World,
-    ManageDirection: ManageDirection
+    ManageDirection: ManageDirection,
+    Surroundings: Surroundings
 }
