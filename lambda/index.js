@@ -23,6 +23,7 @@ let CurrentWorld = null;
 let tryagain = false;
 let player_pointer_x = 0;
 let player_pointer_y = 0;
+let end_x, end_y;
 let player_orientation = 'E';
 let player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
 let worldmodule = require ("./world.js");
@@ -59,14 +60,20 @@ const NewWorldIntentHandler = {
         switch (AnswerValue){
             case 'pequeño':
                 CurrentWorld = worldmodule.World(4,4);
+                end_x = 4-1;
+                end_y = 4-1;
                 break;
 
             case 'mediano':
                 CurrentWorld = worldmodule.World(6,6);
+                end_x = 6-1;
+                end_y = 6-1;
                 break;
 
             case 'grande':
                 CurrentWorld = worldmodule.World(8,8);
+                end_x = 8-1;
+                end_y = 8-1;
                 break;
 
             default:
@@ -109,6 +116,7 @@ const AnswerDirectionIntentHandler = {
         let direction_wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
         CurrentWorld = direction_wrapper[0];
         player_position_package = direction_wrapper[1];
+        if (player_position_package.player_pointer_x ==)
         speakOutput = speakOutput + direction_wrapper[2];
         
         speakOutput += ' X:'+ player_position_package.player_pointer_x.toString() + ' Y:' + player_position_package.player_pointer_y.toString() + ' Orientacion: ' + player_position_package.player_orientation.toString();
