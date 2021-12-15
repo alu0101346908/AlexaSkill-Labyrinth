@@ -179,9 +179,9 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     let y = player.player_pointer_y;
         switch (player.player_orientation){
         case 'N':
-            if (x+1 >= 0) behind = CurrentWorld[x-1][y];
+            if (x+1 < CurrentWorld.length) behind = CurrentWorld[x-1][y];
             else behind = 'X';
-            if (x-1 < CurrentWorld.length) front = CurrentWorld[x+1][y];
+            if (x-1 >= 0) front = CurrentWorld[x+1][y];
             else front = 'X';
             if (y-1 >= 0) left = CurrentWorld[x][y-1];
             else left = 'X';
@@ -189,9 +189,9 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
             else right = 'X';
             break;    
         case 'S':
-            if (x+1 >= 0) front = CurrentWorld[x-1][y];
+            if (x+1 < CurrentWorld.length) front = CurrentWorld[x-1][y];
             else front = 'X';
-            if (x-1 < CurrentWorld.length) behind = CurrentWorld[x+1][y];
+            if (x-1 >= 0 behind = CurrentWorld[x+1][y];
             else behind = 'X';
             if (y-1 >= 0) right = CurrentWorld[x][y-1];
             else right = 'X';
@@ -199,9 +199,9 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
             else left = 'X';
             break;
         case 'O':
-            if (x+1 >= 0) left = CurrentWorld[x-1][y];
+            if (x+1 < CurrentWorld.length) left = CurrentWorld[x-1][y];
             else left = 'X';
-            if (x-1 < CurrentWorld.length) right = CurrentWorld[x+1][y];
+            if (x-1 >= 0) right = CurrentWorld[x+1][y];
             else right = 'X';
             if (y-1 >= 0) front = CurrentWorld[x][y-1];
             else front = 'X';
@@ -209,9 +209,9 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
             else behind = 'X';
             break;
         case 'E':
-            if (x+1 >= 0) right = CurrentWorld[x-1][y];
+            if (x+1 < CurrentWorld.length) right = CurrentWorld[x-1][y];
             else right = 'X';
-            if (x-1 < CurrentWorld.length) left = CurrentWorld[x+1][y];
+            if (x-1 >= 0) left = CurrentWorld[x+1][y];
             else left = 'X';
             if (y-1 >= 0) behind = CurrentWorld[x][y-1];
             else behind = 'X';
