@@ -51,7 +51,7 @@ function World(i,j) {
             valid_world == false
             Cells = CellsBackup;
         }
-        else if (Cells[i][j-2] == 'X' && Cells[i-2][j-2] == 'X' && Cells[i-2][j] == 'X') {
+        else if (Cells[i-1][j-2] == 'X' && Cells[i-2][j-2] == 'X' && Cells[i-2][j-1] == 'X') {
             valid_world == false
             Cells = CellsBackup;
         }
