@@ -84,21 +84,25 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
+                break;
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
+                break;
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
+                break;
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
+                break;
             }
             break;
         case 'izquierda':
@@ -106,21 +110,25 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
+                break;
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
+                break;
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
+                break;
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
+                break;
             }
             break;
         case 'adelante':
@@ -130,21 +138,25 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
+                break;
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'N';
+                break;
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
+                break;
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
+                break;
             }
             break;
         case 'detras':
@@ -153,21 +165,25 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 //CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
+                break;
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
+                break;
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
+                break;
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
+                break;
             }
             break;
     } 
