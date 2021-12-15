@@ -340,6 +340,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         LaunchRequestHandler,
         AnswerDirectionIntentHandler,
         NewWorldIntentHandler,
+        SituationIntentHandler,
         HelpIntentHandler,
         ReturnToCheckpointIntentHandler,
         PutCheckpointIntentHandler,
