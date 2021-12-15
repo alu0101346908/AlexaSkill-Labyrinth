@@ -93,10 +93,11 @@ const NewWorldIntentHandler = {
             }
         }
         let contador = count.toString();
-        let speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
+        //let speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
+        let speakOutput = "Entras en el laberinto";
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput += "." + "A tu derecha tienes un" + worldmodule.SymbolToString(right) + " delante un" + worldmodule.SymbolToString(front) + " a tu izquierda un" + worldmodule.SymbolToString(left) + " y detras un" + worldmodule.SymbolToString(behind)
+        speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right) + " delante un" + worldmodule.SymbolToString(front) + " a tu izquierda un" + worldmodule.SymbolToString(left) + " y detras un" + worldmodule.SymbolToString(behind)
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -120,7 +121,7 @@ const AnswerDirectionIntentHandler = {
                 .reprompt(speakOutput)
                 .getResponse();
         }
-        let speakOutput = 'Respondiste ' + AnswerValue;
+        let speakOutput = 'Te mueves ' + AnswerValue;
         let direction_wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
         CurrentWorld = direction_wrapper[0];
         player_position_package = direction_wrapper[1];
@@ -133,7 +134,7 @@ const AnswerDirectionIntentHandler = {
                 .getResponse();
         }
         speakOutput = speakOutput + direction_wrapper[2];
-        speakOutput += ' X:'+ player_position_package.player_pointer_x.toString() + ' Y:' + player_position_package.player_pointer_y.toString() + ' Orientacion: ' + player_position_package.player_orientation.toString();
+        //speakOutput += ' X:'+ player_position_package.player_pointer_x.toString() + ' Y:' + player_position_package.player_pointer_y.toString() + ' Orientacion: ' + player_position_package.player_orientation.toString();
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
         speakOutput += "." + "A tu derecha tienes un" + worldmodule.SymbolToString(right) + " delante un" + worldmodule.SymbolToString(front) + " a tu izquierda un" + worldmodule.SymbolToString(left) + " y detras un" + worldmodule.SymbolToString(behind)
