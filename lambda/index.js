@@ -126,8 +126,7 @@ const PutCheckpointIntentHandler = {
         // CODIGO
         let NewCheckPoint = playermodule.Checkpoint(AnswerValue, player_position_package.player_pointer_x, player_position_package.player_pointer_y);
         checkpoint_wrapper.push(NewCheckPoint);
-        const speakOutput = 'Se ha creado un checkpoint llamado ' + NewCheckPoint.name + " en la posicion x:" + player_position_package.player_pointer_x.toString() + " y en la posicion y:" + player_position_package.player_pointer_y.toString() +
-        ".Tienes " + checkpoint_wrapper.length + " checkpoints";
+        const speakOutput = 'Se ha creado un checkpoint llamado ' + NewCheckPoint.name + " en la posicion x:" + player_position_package.player_pointer_x.toString() + " y en la posicion y:" + player_position_package.player_pointer_y.toString() + ".Tienes " + checkpoint_wrapper.length + " checkpoints";
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
