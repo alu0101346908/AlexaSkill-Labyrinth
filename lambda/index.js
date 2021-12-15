@@ -30,7 +30,7 @@ let playermodule = require ("./player.js");
 
 let checkpoint_wrapper = [];
 
-let inventory_wrapper;
+let inventory_wrapper = [];
 
 
 const NewWorldIntentHandler = {
@@ -47,6 +47,11 @@ const NewWorldIntentHandler = {
                 .speak(speakOutput)
                 .reprompt(speakOutput)
                 .getResponse();
+        }
+        if (tryagain){
+            player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
+            checkpoint_wrapper = [];
+            inventory_wrapper = [];
         }
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
         let count = 0;
@@ -72,7 +77,6 @@ const NewWorldIntentHandler = {
                     .getResponse();
                 break;
         }
-        player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
         for (let n = 0; n < CurrentWorld.length; n++) {
             for (let m = 0; m < CurrentWorld[n].length; m++) {
                 count++;
