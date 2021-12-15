@@ -28,6 +28,24 @@
             }
           ],
           "samples": [
+            "Girar a la {Direction}",
+            "Giro a la {Direction}",
+            "Ando hacia la {Direction}",
+            "Camino hacia la {Direction}",
+            "Andar hacia la {Direction}",
+            "Caminar hacia la {Direction}",
+            "Voy hacia la {Direction}",
+            "Ir hacia la {Direction}",
+            "Hacia la {Direction}",
+            "Quiero ir hacia la {Direction}",
+            "Ando hacia {Direction}",
+            "Camino hacia {Direction}",
+            "Andar hacia {Direction}",
+            "Caminar hacia {Direction}",
+            "Voy hacia {Direction}",
+            "Ir hacia {Direction}",
+            "Hacia {Direction}",
+            "Quiero ir hacia {Direction}",
             "moverse {Direction}",
             "muevete {Direction}",
             "mueve {Direction}",
@@ -44,7 +62,184 @@
             }
           ],
           "samples": [
+            "Iniciar un laberinto {Size}",
+            "Iniciar laberinto {Size}",
+            "Iníciame un laberinto {Size}",
+            "Iníciame laberinto {Size}",
+            "Inicia laberinto {Size}",
+            "Inicia un laberinto {Size}",
+            "Formar un laberinto {Size}",
+            "Formar laberinto {Size}",
+            "Fórmame un laberinto {Size}",
+            "Fórmame laberinto {Size}",
+            "Forma laberinto {Size}",
+            "Forma un laberinto {Size}",
+            "Montar un laberinto {Size}",
+            "Montar laberinto {Size}",
+            "Móntame un laberinto {Size}",
+            "Móntame laberinto {Size}",
+            "Monta laberinto {Size}",
+            "Monta un laberinto {Size}",
+            "Hacer un laberinto {Size}",
+            "Hacer laberinto {Size}",
+            "Hazme un laberinto {Size}",
+            "Hazme laberinto {Size}",
+            "Haz laberinto {Size}",
+            "Haz un laberinto {Size}",
+            "Crear un laberinto {Size}",
+            "Crear laberinto {Size}",
+            "Créame un laberinto {Size}",
+            "Créame laberinto {Size}",
+            "Crea laberinto {Size}",
+            "Crea un laberinto {Size}",
+            "Iniciar un mundo {Size}",
+            "Iniciar mundo {Size}",
+            "Iníciame un mundo {Size}",
+            "Iníciame mundo {Size}",
+            "Inicia mundo {Size}",
+            "Inicia un mundo {Size}",
+            "Formar un mundo {Size}",
+            "Formar mundo {Size}",
+            "Fórmame un mundo {Size}",
+            "Fórmame mundo {Size}",
+            "Forma mundo {Size}",
+            "Forma un mundo {Size}",
+            "Montar un mundo {Size}",
+            "Montar mundo {Size}",
+            "Móntame un mundo {Size}",
+            "Móntame mundo {Size}",
+            "Monta mundo {Size}",
+            "Monta un mundo {Size}",
+            "Hacer un mundo {Size}",
+            "Hacer mundo {Size}",
+            "Hazme un mundo {Size}",
+            "Hazme mundo {Size}",
+            "Haz mundo {Size}",
+            "Haz un mundo {Size}",
+            "Crear un mundo {Size}",
+            "Crear mundo {Size}",
+            "Créame un mundo {Size}",
+            "Créame mundo {Size}",
+            "Crea un mundo {Size}",
             "crea mundo {Size}"
+          ]
+        },
+        {
+          "name": "SituationIntent",
+          "slots": [],
+          "samples": [
+            "Describe el entorno",
+            "Describe el lugar",
+            "Qué veo",
+            "Dime qué veo",
+            "Dime cómo estoy",
+            "Repite la situación",
+            "Repite las opciones",
+            "Repíteme mis opciones"
+          ]
+        },
+        {
+          "name": "PickObjectIntent",
+          "slots": [
+            {
+              "name": "Object",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "Añade {Object}",
+            "Quiero recoger {Object}",
+            "Quiero coger {Object}",
+            "Cojo la {Object}",
+            "Cojo el {Object}",
+            "Cojo {Object}",
+            "Recojo {Object}"
+          ]
+        },
+        {
+          "name": "UseObjectIntent",
+          "slots": [
+            {
+              "name": "Object",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "Voy a usar {Object}",
+            "Empleo {Object}",
+            "Utilizo {Object}",
+            "Uso {Object}",
+            "Quiero emplear {Object}",
+            "Quiero utilizar {Object}",
+            "Quiero usar {Object}",
+            "Emplear {Object}",
+            "Utilizar {Object}",
+            "Usar {Object}"
+          ]
+        },
+        {
+          "name": "ReturnToCheckpointIntent",
+          "slots": [
+            {
+              "name": "Query",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "Regresa a {Query}",
+            "Vuelve a {Query}",
+            "Retrocedo hasta {Query}",
+            "Regreso a {Query}",
+            "Vuelvo a {Query}",
+            "Vuelvo al checkpoint {Query}",
+            "Quiero volver al checkpoint {Query}",
+            "Regresar al checkpoint {Query}",
+            "Volver al checkpoint {Query}"
+          ]
+        },
+        {
+          "name": "PutCheckpointIntent",
+          "slots": [
+            {
+              "name": "Query",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "Pon el checkpoint {Query}",
+            "Establece checkpoint {Query}",
+            "Guardar checkpoint {Query}",
+            "Guarda el checkpoint {Query}",
+            "Pon aquí el checkpoint {Query}",
+            "Pon aquí checkpoint {Query}",
+            "Marca aquí checkpoint {Query}",
+            "Marca aquí el checkpoint {Query}",
+            "Marca el checkpoint {Query}",
+            "Marcar checkpoint {Query}"
+          ]
+        },
+        {
+          "name": "InventoryIntent",
+          "slots": [],
+          "samples": [
+            "Lista los objetos",
+            "Lista objetos",
+            "Lista de objetos",
+            "Qué tengo encima",
+            "Lista mi inventario",
+            "Lista lo que tengo",
+            "Lista mis objetos",
+            "Dime qué objetos tengo",
+            "Ver inventario",
+            "Dime mi inventario",
+            "Quiero ver mi inventario",
+            "Quiero escuchar mi inventario",
+            "Quiero saber mi inventario",
+            "Enumera mis objetos",
+            "Enumera los objetos",
+            "Dime qué tengo",
+            "Dime qué llevo encima",
+            "Mirar inventario"
           ]
         }
       ],
@@ -72,5 +267,5 @@
       ]
     }
   },
-  "version": "6"
+  "version": "11"
 }
