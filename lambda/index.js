@@ -72,6 +72,7 @@ const NewWorldIntentHandler = {
                     .getResponse();
                 break;
         }
+        player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
         for (let n = 0; n < CurrentWorld.length; n++) {
             for (let m = 0; m < CurrentWorld[n].length; m++) {
                 count++;
@@ -219,7 +220,7 @@ const SituationIntentHandler = {
     handle(handlerInput) {
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        let speakOutput = "A tu derecha tienes un " + worldmodule.SymbolToString(right) + " delante un " + worldmodule.SymbolToString(front) + " a tu izquierda un " + worldmodule.SymbolToString(left) + " y detras un " + worldmodule.SymbolToString(behind);
+        let speakOutput = "A tu derecha tienes un" + worldmodule.SymbolToString(right) + " delante un" + worldmodule.SymbolToString(front) + " a tu izquierda un" + worldmodule.SymbolToString(left) + " y detras un" + worldmodule.SymbolToString(behind);
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
