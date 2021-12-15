@@ -134,6 +134,35 @@ const PutCheckpointIntentHandler = {
     }
 };
 
+const ReturnToCheckpointIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ReturnToCheckpointIntent';
+    },
+    handle(handlerInput) {
+        let found_checkpoint = false;
+        const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
+        for (let i = 0; i < checkpoint_wrapper.length; i++){
+            if (AnswerValue == checkpoint_wrapper[i].name){
+                player_position_package.player_pointer_x = checkpoint_wrapper[i].x;
+                player_position_package.player_pointer_y = checkpoint_wrapper[i].y;
+                found_checkpoint = true;
+            }
+        }
+        let speakOutput;
+        if (found_checkpoint){
+            speakOutput = speakOutput + "Encontrado el checkpoint llamado " + AnswerValue + " regresando a " + player_position_package.player_pointer_x.toString() + " " + player_position_package.player_pointer_y.toString(); 
+        }
+        else {
+            speakOutput = speakOutput + "No se ha encontrado el checkpoint llamado " + AnswerValue;
+        }
+        // CODIGO
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
 
 const InventoryIntentHandler = {
     canHandle(handlerInput) {
@@ -151,21 +180,6 @@ const InventoryIntentHandler = {
     }
 };
 
-const ReturnToCheckpointIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ReturnToCheckpointIntent';
-    },
-    handle(handlerInput) {
-
-        // CODIGO
-        let speakOutput;
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-    }
-};
 
 const UseObjectIntentHandler = {
     canHandle(handlerInput) {
