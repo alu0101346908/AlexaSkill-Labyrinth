@@ -46,13 +46,13 @@ function World(i,j) {
                 obstacle_counter++;
             }
         }
-        valid_world == false;
+        valid_world = false;
         if (Cells[0][1] == 'X' && Cells[1][0] == 'X' && Cells[1][1] == 'X'){
-            valid_world == false
+            valid_world = true
             Cells = CellsBackup;
         }
         else if (Cells[i-1][j-2] == 'X' && Cells[i-2][j-2] == 'X' && Cells[i-2][j-1] == 'X') {
-            valid_world == false
+            valid_world = true
             Cells = CellsBackup;
         }
    // }
