@@ -241,6 +241,9 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
         case '0':
             symbol = "camino"
         break;
+        case 'I':
+            symbol = "inicio"
+        break;
     }
     return symbol;
  }
