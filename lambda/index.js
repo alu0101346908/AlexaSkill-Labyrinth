@@ -136,7 +136,7 @@ const PutCheckpointIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PutCheckpointIntent';
     },
     handle(handlerInput) {
-
+        const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         // CODIGO
         let NewCheckPoint = playermodule.Checkpoint(AnswerValue, player_position_package.player_pointer_x, player_position_package.player_pointer_y);
         const speakOutput = 'Se ha creado un checkpoint llamado ' + NewCheckPoint.name + " en la posicion x:" + player_position_package.player_pointer_x.toString() + " y en la posicion y:" + player_position_package.player_pointer_y.toString();
@@ -326,6 +326,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         AnswerDirectionIntentHandler,
         NewWorldIntentHandler,
         HelpIntentHandler,
+        PutCheckpointIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
         SessionEndedRequestHandler,
