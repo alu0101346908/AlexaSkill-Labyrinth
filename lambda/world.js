@@ -31,7 +31,7 @@ function World(i,j) {
     Cells[i-1][j-1] = ['F'];
     let CellsBackup = Cells;
     let valid_world = false;
-    while (valid_world == false){
+    while (valid_world === false){
         let obstacles_percentage = 0.30;
         let obstacles_number = obstacle_proportion * obstacles_percentage;
         obstacles_number = Math.round(obstacles_number);
