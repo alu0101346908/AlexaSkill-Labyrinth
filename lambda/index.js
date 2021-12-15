@@ -26,7 +26,7 @@ let player_pointer_y = 0;
 let player_orientation = 'E';
 let player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
 let worldmodule = require ("./world.js");
-let playermodule = require ("./player.js");
+//let playermodule = require ("./player.js");
 
 let checkpoint_wrapper;
 
