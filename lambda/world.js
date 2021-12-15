@@ -149,6 +149,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
             break;
         case 'detras':
         case 'atras':
+            return player_position_package.player_orientation = 'K';
             if (player_position_package.player_orientation == 'S' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
