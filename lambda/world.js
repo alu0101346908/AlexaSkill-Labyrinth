@@ -223,15 +223,19 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
  }
  function SymbolToString(symbol){
     switch (symbol){
+        case ['X']:
         case 'X':
             symbol = "muro"
         break;
+        case ['O']:
         case 'O':
             symbol = "hacha"
         break;
+        case ['F']:
         case 'F':
             symbol = "salida"
         break;
+        case ['A']:
         case 'A':
             symbol = "arbusto"
         break;
