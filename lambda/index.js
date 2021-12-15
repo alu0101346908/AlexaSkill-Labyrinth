@@ -112,13 +112,27 @@ const AnswerDirectionIntentHandler = {
     },
     handle(handlerInput) {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
+        if (CurrentWorld == null){
+            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            CurrentWorld = null;
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
         let speakOutput = 'Respondiste ' + AnswerValue;
         let direction_wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
         CurrentWorld = direction_wrapper[0];
         player_position_package = direction_wrapper[1];
-        if (player_position_package.player_pointer_x ==)
+        if (player_position_package.player_pointer_x == end_x && player_position_package.player_pointer_y == end_y){
+            speakOutput = "¡Felicidades has llegado a la meta! El laberinto se va a autodestruir.";
+            CurrentWorld = null;
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
         speakOutput = speakOutput + direction_wrapper[2];
-        
         speakOutput += ' X:'+ player_position_package.player_pointer_x.toString() + ' Y:' + player_position_package.player_pointer_y.toString() + ' Orientacion: ' + player_position_package.player_orientation.toString();
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
@@ -139,6 +153,14 @@ const PutCheckpointIntentHandler = {
     },
     handle(handlerInput) {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
+        if (CurrentWorld == null){
+            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            CurrentWorld = null;
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
         let NewCheckPoint = playermodule.Checkpoint(AnswerValue, player_position_package.player_pointer_x, player_position_package.player_pointer_y);
         checkpoint_wrapper.push(NewCheckPoint);
         const speakOutput = 'Se ha creado un checkpoint llamado ' + NewCheckPoint.name + " en la posicion x:" + player_position_package.player_pointer_x.toString() + " y en la posicion y:" + player_position_package.player_pointer_y.toString() + ".Tienes " + checkpoint_wrapper.length + " checkpoints";
@@ -157,6 +179,14 @@ const ReturnToCheckpointIntentHandler = {
     handle(handlerInput) {
         let found_checkpoint = false;
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
+        if (CurrentWorld == null){
+            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            CurrentWorld = null;
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
         for (let i = 0; i < checkpoint_wrapper.length; i++){
             if (AnswerValue == checkpoint_wrapper[i].name){
                 player_position_package.player_pointer_x = checkpoint_wrapper[i].x;
@@ -188,6 +218,14 @@ const InventoryIntentHandler = {
     },
     handle(handlerInput) {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
+        if (CurrentWorld == null){
+            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            CurrentWorld = null;
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
         // CODIGO
         let speakOutput;
         return handlerInput.responseBuilder
@@ -204,7 +242,14 @@ const UseObjectIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'UseObjectIntent';
     },
     handle(handlerInput) {
-
+        if (CurrentWorld == null){
+            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            CurrentWorld = null;
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
         // CODIGO
         let speakOutput;
         return handlerInput.responseBuilder
@@ -220,7 +265,14 @@ const PickObjectIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PickObjectIntent';
     },
     handle(handlerInput) {
-        
+        if (CurrentWorld == null){
+            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            CurrentWorld = null;
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
         // CODIGO
         let speakOutput;
         return handlerInput.responseBuilder
@@ -237,6 +289,14 @@ const SituationIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SituationIntent';
     },
     handle(handlerInput) {
+        if (CurrentWorld == null){
+            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            CurrentWorld = null;
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
         let speakOutput = "A tu derecha tienes un" + worldmodule.SymbolToString(right) + " delante un" + worldmodule.SymbolToString(front) + " a tu izquierda un" + worldmodule.SymbolToString(left) + " y detras un" + worldmodule.SymbolToString(behind);
