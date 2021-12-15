@@ -26,7 +26,7 @@ let player_pointer_y = 0;
 let player_orientation = 'E';
 let player_position_package = { player_pointer_x, player_pointer_y, player_orientation };
 let worldmodule = require ("./world.js");
-//let playermodule = require ("./player.js");
+let playermodule = require ("./player.js");
 
 let checkpoint_wrapper;
 
@@ -114,21 +114,7 @@ const AnswerDirectionIntentHandler = {
     }
 };
 
-const InventoryIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'InventoryIntent';
-    },
-    handle(handlerInput) {
-        
-        // CODIGO
-        let speakOutput;
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-    }
-};
+
 
 const PutCheckpointIntentHandler = {
     canHandle(handlerInput) {
@@ -140,6 +126,23 @@ const PutCheckpointIntentHandler = {
         // CODIGO
         let NewCheckPoint = playermodule.Checkpoint(AnswerValue, player_position_package.player_pointer_x, player_position_package.player_pointer_y);
         const speakOutput = 'Se ha creado un checkpoint llamado ' + NewCheckPoint.name + " en la posicion x:" + player_position_package.player_pointer_x.toString() + " y en la posicion y:" + player_position_package.player_pointer_y.toString();
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+
+const InventoryIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'InventoryIntent';
+    },
+    handle(handlerInput) {
+        
+        // CODIGO
+        let speakOutput;
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
