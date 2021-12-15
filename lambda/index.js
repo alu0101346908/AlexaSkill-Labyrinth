@@ -133,7 +133,6 @@ const AnswerDirectionIntentHandler = {
                 .reprompt(speakOutput)
                 .getResponse();
         }
-        speakOutput = speakOutput + direction_wrapper[2];
         //speakOutput += ' X:'+ player_position_package.player_pointer_x.toString() + ' Y:' + player_position_package.player_pointer_y.toString() + ' Orientacion: ' + player_position_package.player_orientation.toString();
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
