@@ -173,7 +173,40 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     } 
     return [CurrentWorld, player_position_package];
 }
+ function surroundings(CurrentWorld, player){
+        let left, right, front, behind;
+        let x = player.player_pointer_x;
+        let y = player.player_pointer_y;
+            switch (player.player_orientation){
+            case 'N':
+                behind = CurrentWorld[x-1][y]
+                front = CurrentWorld[x+1][y]
+                left = CurrentWorld[x][y-1]
+                right =CurrentWorld[x][y+1]
+                break;    
+            case 'S':
+                front = CurrentWorld[x-1][y]
+                behind = CurrentWorld[x+1][y]
+                right = CurrentWorld[x][y-1]
+                left =CurrentWorld[x][y+1]
+                break;
+            case 'O':
+                left = CurrentWorld[x-1][y]
+                right = CurrentWorld[x+1][y]
+                front = CurrentWorld[x][y-1]
+                behind = CurrentWorld[x][y+1]
+                break;
+            case 'E':
+                right = CurrentWorld[x-1][y]
+                left = CurrentWorld[x+1][y]
+                behind = CurrentWorld[x][y-1]
+                front =CurrentWorld[x][y+1]
+                break;
+            }
+        return [left,right,front,behind];
+ }
  
+
 module.exports = {
     World: World,
     ManageDirection: ManageDirection
