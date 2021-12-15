@@ -13,7 +13,6 @@ function Inventory(){
 
 
 
-
 module.exports = {
     Checkpoint: Checkpoint,
     Inventory: Inventory
