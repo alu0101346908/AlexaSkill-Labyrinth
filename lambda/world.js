@@ -28,10 +28,10 @@ function World(i,j) {
             return;
     }*/
     Cells[0][0] = ['J'];
-    Cells[i][j] = ['F'];
+    Cells[i-1][j-1] = ['F'];
     let CellsBackup = Cells;
     let valid_world = false;
-    while (valid_world == false){
+    while (valid_world != true){
         let obstacles_percentage = 0.30;
         let obstacles_number = obstacle_proportion * obstacles_percentage;
         obstacles_number = Math.round(obstacles_number);
@@ -51,7 +51,7 @@ function World(i,j) {
             valid_world == false
             Cells = CellsBackup;
         }
-        else if (Cells[i][j-1] == 'X' && Cells[i-1][j-1] == 'X' && Cells[i-1][j] == 'X') {
+        else if (Cells[i][j-2] == 'X' && Cells[i-2][j-2] == 'X' && Cells[i-2][j] == 'X') {
             valid_world == false
             Cells = CellsBackup;
         }
