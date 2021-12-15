@@ -129,7 +129,7 @@ const PutCheckpointIntentHandler = {
             .speak(speakOutput)
             .reprompt(speakOutput)
             .getResponse();
-    }
+    } 
 };
 
 const ReturnToCheckpointIntentHandler = {
