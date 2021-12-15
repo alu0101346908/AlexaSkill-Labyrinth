@@ -238,7 +238,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
         case 'A':
             symbol = "arbusto"
         break;
-        case 0:
+        case '0':
             symbol = "camino"
         break;
     }
