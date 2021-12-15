@@ -28,7 +28,7 @@ let player_position_package = { player_pointer_x, player_pointer_y, player_orien
 let worldmodule = require ("./world.js");
 let playermodule = require ("./player.js");
 
-let checkpoint_wrapper;
+let checkpoint_wrapper = [];
 
 let inventory_wrapper;
 
