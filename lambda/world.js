@@ -227,22 +227,22 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     }
     switch (symbol){
         case 'X':
-            symbol = "muro"
+            symbol = " muro"
         break;
         case 'O':
-            symbol = "hacha"
+            symbol = " hacha"
         break;
         case 'F':
-            symbol = "salida"
+            symbol = "a salida"
         break;
         case 'A':
-            symbol = "arbusto"
+            symbol = " arbusto"
         break;
         case '0':
-            symbol = "camino"
+            symbol = " camino"
         break;
         case 'I':
-            symbol = "inicio"
+            symbol = " inicio"
         break;
     }
     return symbol;
