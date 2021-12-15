@@ -55,7 +55,7 @@ function World(i,j) {
             valid_world = true
             Cells = CellsBackup;
         }
-   // }
+    }
     return Cells;
     
 }
