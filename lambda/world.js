@@ -232,12 +232,14 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
         case 'O':
             symbol = "hacha"
         break;
-        
         case 'F':
             symbol = "salida"
         break;
         case 'A':
             symbol = "arbusto"
+        break;
+        case 0:
+            symbol = "camino"
         break;
     }
     return symbol;
