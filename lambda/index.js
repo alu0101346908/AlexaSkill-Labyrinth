@@ -151,10 +151,10 @@ const ReturnToCheckpointIntentHandler = {
         }
         let speakOutput;
         if (found_checkpoint){
-            speakOutput = speakOutput + "Encontrado el checkpoint llamado " + AnswerValue + " regresando a " + player_position_package.player_pointer_x.toString() + " " + player_position_package.player_pointer_y.toString(); 
+            speakOutput = "Encontrado el checkpoint llamado " + AnswerValue + " regresando a " + player_position_package.player_pointer_x.toString() + " " + player_position_package.player_pointer_y.toString(); 
         }
         else {
-            speakOutput = speakOutput + "No se ha encontrado el checkpoint llamado " + AnswerValue;
+            speakOutput = "No se ha encontrado el checkpoint llamado " + AnswerValue;
         }
         // CODIGO
         return handlerInput.responseBuilder
