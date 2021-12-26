@@ -297,12 +297,12 @@ const PickObjectIntentHandler = {
         if (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H'){
                 switch(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y][0]){
                     case 'H':
-                        speakOutput = "Has encontrado un hacha, la recoges";
+                        speakOutput = "Has encontrado un hacha, la recojes";
                         inventory_wrapper.push(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y]);
                         break;
 
                     case 'B':
-                        speakOutput = "Has encontrado una bomba, la recoges";
+                        speakOutput = "Has encontrado una bomba, la recojes";
                         inventory_wrapper.push(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y]);
                         break;
                 }
