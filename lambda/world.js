@@ -57,18 +57,6 @@ function World(i,j) {
             Cells = CellsBackup;
         }
     }
-    let bush_counter = 0;
-    while (bush_counter < Math.round(obstacles_number * 0.1)){
-        let row = Math.random()*random_proportion;
-        row = Math.round(row); 
-        let col = Math.random()*random_proportion;
-        col = Math.round(col);
-        if ((Cells[row][col] != 'I') && (Cells[row][col] != 'X') && (Cells[row][col] != 'H') && (Cells[row][col] != 'F' && (Cells[row][col] != 'A'))){
-            Cells[row][col] = ['A'];
-            bush_counter++;
-        }
-    }
-    //generacion del hacha viable
     let good_gen = false;
     while(!good_gen){
         if (Cells[0][1] != 'X' && good_gen === false){
@@ -85,6 +73,18 @@ function World(i,j) {
         }
 
     }
+    let bush_counter = 0;
+    while (bush_counter < Math.round(obstacles_number * 0.20)){
+        let row = Math.random()*random_proportion;
+        row = Math.round(row); 
+        let col = Math.random()*random_proportion;
+        col = Math.round(col);
+        if ((Cells[row][col] != 'I') && (Cells[row][col] != 'X') && (Cells[row][col] != 'H') && (Cells[row][col] != 'F') && (Cells[row][col] != 'A')){
+            Cells[row][col] = ['A'];
+            bush_counter++;
+        }
+    }
+
     
     
     return Cells;
