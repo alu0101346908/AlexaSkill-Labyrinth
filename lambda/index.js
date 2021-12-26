@@ -253,6 +253,7 @@ const InventoryIntentHandler = {
     }
 };
 
+let object_found = false
 
 const UseObjectIntentHandler = {
     canHandle(handlerInput) {
@@ -319,9 +320,19 @@ const SingleDirectionIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SingleDirectionIntent';
     },
     handle(handlerInput) {
-        
+        const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         let speakOutput;
-        
+        if (object_found){
+            let result = worldmodule.UseObjectDirection(AnswerValue,CurrentWorld,player_position_package);
+            CurrentWorld = result[0];
+            let success = result[1];
+            if (success){
+                speakOutput = "Se ha usado el hacha para eliminar el arbusto en la direccion " + AnswerValue;
+            }
+            else{
+                speakOutput = "No hay ningun arbusto en la direccion " + AnswerValue;
+            }
+        }
             return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
