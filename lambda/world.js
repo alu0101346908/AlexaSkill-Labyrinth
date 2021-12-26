@@ -416,5 +416,6 @@ module.exports = {
     World: World,
     ManageDirection: ManageDirection,
     Surroundings: Surroundings,
-    SymbolToString: SymbolToString
+    SymbolToString: SymbolToString,
+    UseObjectDirection: UseObjectDirection
 }
