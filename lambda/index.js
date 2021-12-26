@@ -293,15 +293,14 @@ const PickObjectIntentHandler = {
         let speakOutput;
         //revisar implementacion de las celdas, si añadimos vacio al objeto
         if (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y].length > 0){
-            for (let i = 0; i < CurrentWorld[player_position_package.x][player_position_package.y].length; i++){
-                switch(CurrentWorld[player_position_package.x][player_position_package.y][i]){
+                switch(CurrentWorld[player_position_package.x][player_position_package.y]){
                     case 'H':
                         speakOutput = "Has encontrado un hacha, la recoges"
-                        inventory_wrapper.push(CurrentWorld[player_position_package.x][player_position_package.y][i])
+                        inventory_wrapper.push(CurrentWorld[player_position_package.x][player_position_package.y])
 
                     case 'B':
                         speakOutput = "Has encontrado una bomba, la recoges"
-                        inventory_wrapper.push(CurrentWorld[player_position_package.x][player_position_package.y][i])
+                        inventory_wrapper.push(CurrentWorld[player_position_package.x][player_position_package.y])
                 }
             }
         }
