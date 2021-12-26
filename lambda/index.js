@@ -228,7 +228,20 @@ const InventoryIntentHandler = {
         }
         // CODIGO
         let speakOutput;
-        //if (inventory_wrapper.length === 0)
+        if (inventory_wrapper.length === 0){
+            speakOutput = "El inventario está vacio, primero consigue un objeto"
+        }
+        else {
+            speakOutput = "Tienes "
+            for (let i = 0; i < inventory_wrapper.length ; i++){
+                switch(inventory_wrapper[i]){
+                    case 'H':
+                        speakOutput += "un hacha "
+                    case 'B':
+                        speakOutput += "una bomba "
+                }
+            }
+        }
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
