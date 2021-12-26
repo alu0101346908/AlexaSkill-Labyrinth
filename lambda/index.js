@@ -281,6 +281,7 @@ const PickObjectIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PickObjectIntent';
     },
     handle(handlerInput) {
+        const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
             CurrentWorld = null;
