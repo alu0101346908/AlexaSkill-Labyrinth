@@ -297,16 +297,16 @@ const PickObjectIntentHandler = {
         if (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H'){
                 switch(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y][0]){
                     case 'H':
-                        speakOutput = "Has encontrado un hacha, la recoges"
-                        inventory_wrapper.push(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y])
+                        speakOutput = "Has encontrado un hacha, la recoges";
+                        inventory_wrapper.push(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y]);
 
                     case 'B':
-                        speakOutput = "Has encontrado una bomba, la recoges"
-                        inventory_wrapper.push(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y])
+                        speakOutput = "Has encontrado una bomba, la recoges";
+                        inventory_wrapper.push(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y]);
                 }
             }
         else {
-            speakOutput = "No estas sobre ningun objeto, muevete hacia la casilla donde se encuentre y vuelve a intentarlo"
+            speakOutput = "No estas sobre ningun objeto, muevete hacia la casilla donde se encuentre y vuelve a intentarlo";
         }
         return handlerInput.responseBuilder
             .speak(speakOutput)
