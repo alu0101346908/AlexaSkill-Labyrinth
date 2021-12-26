@@ -115,7 +115,6 @@ const AnswerDirectionIntentHandler = {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
-            CurrentWorld = null;
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -158,7 +157,6 @@ const PutCheckpointIntentHandler = {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
-            CurrentWorld = null;
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -184,7 +182,6 @@ const ReturnToCheckpointIntentHandler = {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
-            CurrentWorld = null;
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -222,7 +219,6 @@ const InventoryIntentHandler = {
     handle(handlerInput) {
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
-            CurrentWorld = null;
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -263,7 +259,6 @@ const UseObjectIntentHandler = {
     handle(handlerInput) {
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
-            CurrentWorld = null;
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
