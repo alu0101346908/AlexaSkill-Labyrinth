@@ -291,6 +291,23 @@ const PickObjectIntentHandler = {
         }
         // CODIGO
         let speakOutput;
+        //revisar implementacion de las celdas, si añadimos vacio al objeto
+        if (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y].length > 1){
+            for (let i = 0; i < CurrentWorld[player_position_package.x][player_position_package.y].length; i++){
+                switch(CurrentWorld[player_position_package.x][player_position_package.y][i]){
+                    case 'H':
+                        speakOutput = "Has encontrado un hacha, la recoges"
+                        inventory_wrapper.push(CurrentWorld[player_position_package.x][player_position_package.y][i])
+
+                    case 'B':
+                        speakOutput = "Has encontrado una bomba, la recoges"
+                        inventory_wrapper.push(CurrentWorld[player_position_package.x][player_position_package.y][i])
+                }
+            }
+        }
+        else {
+            speakOutput = "No estas sobre ningun objeto, muevete hacia la casilla donde se encuentre y vuelve a intentarlo"
+        }
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
