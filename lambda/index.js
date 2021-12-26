@@ -295,7 +295,7 @@ const UseObjectIntentHandler = {
                 }
             }
         }
-        if (object_found = true){
+        if (object_found == true){
             speakOutput = "¿En que direccion quieres usar el objeto? "
             //reprompt
 
@@ -333,6 +333,7 @@ const SingleDirectionIntentHandler = {
                 speakOutput = "No hay ningun arbusto en la direccion " + AnswerValue;
             }
         }
+        else speakOutput = "No se puede realizar dicha acción, vuelve a intentarlo"
             return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
