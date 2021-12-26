@@ -31,9 +31,10 @@ function World(i,j) {
     Cells[i-1][j-1] = ['F'];
     let CellsBackup = Cells;
     let valid_world = false;
+    let obstacles_number
     while (!valid_world){
         let obstacles_percentage = 0.20;
-        let obstacles_number = obstacle_proportion * obstacles_percentage;
+        obstacles_number = obstacle_proportion * obstacles_percentage;
         obstacles_number = Math.round(obstacles_number);
         let obstacle_counter = 0;
         while (obstacle_counter < obstacles_number){
@@ -41,7 +42,7 @@ function World(i,j) {
             row = Math.round(row); 
             let col = Math.random()*random_proportion;
             col = Math.round(col);
-            if ((Cells[row][col] != 'I') && (Cells[row][col] != 'X') && (Cells[row][col] != 'O') && (Cells[row][col] != 'F')){
+            if ((Cells[row][col] != 'I') && (Cells[row][col] != 'X') && (Cells[row][col] != 'H') && (Cells[row][col] != 'F')){
                 Cells[row][col] = ['X'];
                 obstacle_counter++;
             }
@@ -56,6 +57,36 @@ function World(i,j) {
             Cells = CellsBackup;
         }
     }
+    let bush_counter = 0;
+    while (bush_counter < Math.round(obstacles_number * 0.1)){
+        let row = Math.random()*random_proportion;
+        row = Math.round(row); 
+        let col = Math.random()*random_proportion;
+        col = Math.round(col);
+        if ((Cells[row][col] != 'I') && (Cells[row][col] != 'X') && (Cells[row][col] != 'H') && (Cells[row][col] != 'F' && (Cells[row][col] != 'A'))){
+            Cells[row][col] = ['A'];
+            bush_counter++;
+        }
+    }
+    //generacion del hacha viable
+    let good_gen = false;
+    while(!good_gen){
+        if (Cells[0][1] != 'X' && good_gen === false){
+            good_gen = true;
+            Cells[0][1].push('H');
+        }
+        if(Cells[1][0] != 'X' && good_gen === false){
+            good_gen = true;
+            Cells[1][1].push('H');
+        }
+        if(Cells[1][1] != 'X' && good_gen === false){
+            good_gen = true;
+            Cells[1][1].push('H');
+        }
+
+    }
+    
+    
     return Cells;
     
 }
@@ -245,7 +276,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
         case 'X':
             symbol = " muro"
         break;
-        case 'O':
+        case 'H':
             symbol = " hacha"
         break;
         case 'F':
