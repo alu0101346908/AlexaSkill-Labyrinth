@@ -73,15 +73,15 @@ function World(i,j) {
     while(!good_gen){
         if (Cells[0][1] != 'X' && good_gen === false){
             good_gen = true;
-            Cells[0][1].push('H');
+            Cells[0][1]= ['H'];
         }
         if(Cells[1][0] != 'X' && good_gen === false){
             good_gen = true;
-            Cells[1][1].push('H');
+            Cells[1][1] = ['H'];
         }
         if(Cells[1][1] != 'X' && good_gen === false){
             good_gen = true;
-            Cells[1][1].push('H');
+            Cells[1][1] = ['H'];
         }
 
     }
