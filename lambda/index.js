@@ -303,7 +303,6 @@ const PickObjectIntentHandler = {
                         inventory_wrapper.push(CurrentWorld[player_position_package.x][player_position_package.y])
                 }
             }
-        }
         else {
             speakOutput = "No estas sobre ningun objeto, muevete hacia la casilla donde se encuentre y vuelve a intentarlo"
         }
