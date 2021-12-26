@@ -299,10 +299,12 @@ const PickObjectIntentHandler = {
                     case 'H':
                         speakOutput = "Has encontrado un hacha, la recoges";
                         inventory_wrapper.push(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y]);
+                        break;
 
                     case 'B':
                         speakOutput = "Has encontrado una bomba, la recoges";
                         inventory_wrapper.push(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y]);
+                        break;
                 }
             }
         else {
