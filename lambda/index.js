@@ -235,12 +235,14 @@ const InventoryIntentHandler = {
         }
         else {
             speakOutput = "Tienes "
-            for (let i = 0; i < inventory_wrapper.length ; i++){
-                switch(inventory_wrapper[i]){
+            for (let i = 0; i < inventory_wrapper[0].length ; i++){
+                switch(inventory_wrapper[0][i]){
                     case 'H':
                         speakOutput += "un hacha "
+                        break;
                     case 'B':
                         speakOutput += "una bomba "
+                        break;
                 }
             }
         }
