@@ -269,12 +269,65 @@ const UseObjectIntentHandler = {
                 .getResponse();
         }
         // CODIGO
+        const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Object.value;
+        let object_found = false;
+        let object_index = null;
+
         let speakOutput;
+        if (inventory_wrapper.length === 0){
+            speakOutput = "El inventario está vacio, primero consigue un objeto"
+            return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+        }
+        else{
+            for (let i = 0; i < inventory_wrapper[0].length; i++){
+                switch(AnswerValue){
+                    case 'espada':
+                    case 'hacha':
+                        object_found = true
+                        object_index = i
+                    case 'bomba':
+                        object_found = true
+                        object_index = i
+                }
+            }
+        }
+        if (object_found = true){
+            speakOutput = "¿En que direccion quieres usar el objeto? "
+            //reprompt
+
+            //rescatar direccion
+            //evaluar direccion con la orientacion del player wrapper
+            //direccion valida, speak suscess
+        }
+        else {
+            speakOutput = "No dispones del objeto " + AnswerValue + " intentalo de nuevo."
+        }
+        
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
             .getResponse();
     }
+};
+
+const SingleDirectionIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SingleDirectionIntent';
+    },
+    handle(handlerInput) {
+        
+        let speakOutput;
+        
+            return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+    
 };
 
 const PickObjectIntentHandler = {
@@ -459,6 +512,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         NewWorldIntentHandler,
         UseObjectIntentHandler,
         PickObjectIntentHandler,
+        SingleDirectionIntentHandler,
         SituationIntentHandler,
         InventoryIntentHandler,
         HelpIntentHandler,
