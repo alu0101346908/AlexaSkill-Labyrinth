@@ -250,7 +250,7 @@ const InventoryIntentHandler = {
 };
 
 let object_found = false
-
+let object_index = null
 const UseObjectIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -266,8 +266,7 @@ const UseObjectIntentHandler = {
         }
         // CODIGO
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Object.value;
-        let object_found = false;
-        let object_index = null;
+        object_found = false;
 
         let speakOutput;
         if (inventory_wrapper.length === 0){
