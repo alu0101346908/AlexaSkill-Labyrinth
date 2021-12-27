@@ -243,44 +243,44 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package)
     }
     switch (AnswerValue){
         case 'derecha':
-            if (player_position_package.player_orientation == 'S' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] === 'A'){
+            if (player_position_package.player_orientation == 'S' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'N' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] === 'A'){
+            if (player_position_package.player_orientation == 'N' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'E' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] === 'A'){
+            if (player_position_package.player_orientation == 'E' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'O' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] === 'A'){
+            if (player_position_package.player_orientation == 'O' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] = '0';
                 success = true;
                 break;
             }
             break;
         case 'izquierda':
-            if (player_position_package.player_orientation == 'S' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] === 'A'){
+            if (player_position_package.player_orientation == 'S' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'N' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] === 'A'){
+            if (player_position_package.player_orientation == 'N' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'E' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] === 'A'){
+            if (player_position_package.player_orientation == 'E' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x-1][player_position_package.player_pointer_y] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'O' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] === 'A'){
+            if (player_position_package.player_orientation == 'O' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x+1][player_position_package.player_pointer_y] = '0';
                 success = true;
                 break;
@@ -289,22 +289,22 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package)
         case 'adelante':
         case 'delante':
         case 'alante':
-            if (player_position_package.player_orientation == 'S' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] === 'A'){
+            if (player_position_package.player_orientation == 'S' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x+1][player_position_package.player_pointer_y] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'N' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] === 'A'){
+            if (player_position_package.player_orientation == 'N' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x-1][player_position_package.player_pointer_y] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'E' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] === 'A'){
+            if (player_position_package.player_orientation == 'E' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'O' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] === 'A'){
+            if (player_position_package.player_orientation == 'O' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] = '0';
                 success = true;
                 break;
@@ -312,22 +312,22 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package)
             break;
         case 'detras':
         case 'atras':
-            if (player_position_package.player_orientation == 'S' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] === 'A'){
+            if (player_position_package.player_orientation == 'S' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'N' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] === 'A'){
+            if (player_position_package.player_orientation == 'N' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] =='A'){
                 CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'E' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] === 'A'){
+            if (player_position_package.player_orientation == 'E' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] =='A'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] = '0';
                 success = true;
                 break;
             }
-            if (player_position_package.player_orientation == 'O' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] === 'A'){
+            if (player_position_package.player_orientation == 'O' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] = '0';
                 success = true;
                 break;
