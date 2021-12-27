@@ -327,7 +327,9 @@ const SingleDirectionIntentHandler = {
                 speakOutput = "No hay ningun arbusto en la direccion " + AnswerValue;
             }
         }
-        else speakOutput = "No se puede realizar dicha acción, vuelve a intentarlo"
+        else{
+            speakOutput = "No se puede realizar dicha acción, vuelve a intentarlo"
+        }
             return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
