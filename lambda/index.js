@@ -178,7 +178,7 @@ const AnswerDirectionIntentHandler = {
                 .reprompt(speakOutput)
                 .getResponse();
         }
-        let speakOutput = 'Te mueves ' + AnswerValue;
+        let speakOutput = 'Te mueves hacia ' + AnswerValue;
         let direction_wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
         CurrentWorld = direction_wrapper[0];
         player_position_package = direction_wrapper[1];
