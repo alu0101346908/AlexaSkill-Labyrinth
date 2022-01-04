@@ -105,6 +105,64 @@ const NewWorldIntentHandler = {
     }
 };
 
+const RestartWorldIntentHandler = {
+
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RestartWorldIntent';
+    },
+    handle(handlerInput) {
+        const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
+        let count = 0;
+        let countobstacle = 0;
+        switch (AnswerValue){
+            case 'pequeño':
+                CurrentWorld = worldmodule.World(4,4);
+                end_x = 4-1;
+                end_y = 4-1;
+                break;
+
+            case 'mediano':
+                CurrentWorld = worldmodule.World(6,6);
+                end_x = 6-1;
+                end_y = 6-1;
+                break;
+
+            case 'grande':
+                CurrentWorld = worldmodule.World(8,8);
+                end_x = 8-1;
+                end_y = 8-1;
+                break;
+
+            default:
+                const speakOutput = 'Tamaño de mundo no soportado, prueba con pequeño, mediano y grande';
+                return handlerInput.responseBuilder
+                    .speak(speakOutput)
+                    .reprompt(speakOutput)
+                    .getResponse();
+                break;
+        }
+        for (let n = 0; n < CurrentWorld.length; n++) {
+            for (let m = 0; m < CurrentWorld[n].length; m++) {
+                count++;
+                if (CurrentWorld[n][m] == 'X'){
+                    countobstacle++;
+                }
+            }
+        }
+        let contador = count.toString();
+        //let speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
+        let speakOutput = "Entras en el laberinto";
+        let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
+        let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
+        speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right) + ". Delante, tienes un" + worldmodule.SymbolToString(front) + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left) + ". Detrás de ti está la entrada.";
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
 
 const AnswerDirectionIntentHandler = {
     canHandle(handlerInput) {
