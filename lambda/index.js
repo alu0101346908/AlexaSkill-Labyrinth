@@ -138,7 +138,7 @@ const AnswerDirectionIntentHandler = {
         if (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H'){
             speakOutput += "." + "Te encuentras encima de un objeto"
         }
-        speakOutput += "." + "A tu derecha tienes un" + worldmodule.SymbolToString(right) + " delante un" + worldmodule.SymbolToString(front) + " a tu izquierda un" + worldmodule.SymbolToString(left) + " y detras un" + worldmodule.SymbolToString(behind)
+        speakOutput += "." + "A tu derecha tienes un" + worldmodule.SymbolToString(right) + ". Delante hay un" + worldmodule.SymbolToString(front) + ". A tu izquierda, un" + worldmodule.SymbolToString(left) + ". Detrás de ti, hay un" + worldmodule.SymbolToString(behind)
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -398,7 +398,7 @@ const SituationIntentHandler = {
         }
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        let speakOutput = "A tu derecha tienes un" + worldmodule.SymbolToString(right) + " delante un" + worldmodule.SymbolToString(front) + " a tu izquierda un" + worldmodule.SymbolToString(left) + " y detras un" + worldmodule.SymbolToString(behind);
+        let speakOutput = "A tu derecha tienes un" + worldmodule.SymbolToString(right) + ". Delante hay un" + worldmodule.SymbolToString(front) + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left) + ". Detrás de ti hay un" + worldmodule.SymbolToString(behind);
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
