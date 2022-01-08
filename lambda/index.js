@@ -29,6 +29,7 @@ let player_position_package = { player_pointer_x, player_pointer_y, player_orien
 let worldmodule = require ("./world.js");
 let playermodule = require ("./player.js");
 
+
 let checkpoint_wrapper = [];
 
 let inventory_wrapper = [];
@@ -98,6 +99,7 @@ const NewWorldIntentHandler = {
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
         speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right) + ". Delante, tienes un" + worldmodule.SymbolToString(front) + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left) + ". Detrás de ti está la entrada.";
+        speakOutput = handlerInput.requestEnvelope.request.language;
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
