@@ -131,6 +131,7 @@ const NewWorldIntentHandler = {
                 break;
             case 'medium':
             case 'mediano':
+            case 'normal':
                 CurrentWorld = worldmodule.World(6,6);
                 end_x = 6-1;
                 end_y = 6-1;
@@ -195,6 +196,7 @@ const RestartWorldIntentHandler = {
                 break;
             case 'medium':
             case 'mediano':
+            case 'normal':
                 CurrentWorld = worldmodule.World(6,6);
                 end_x = 6-1;
                 end_y = 6-1;
