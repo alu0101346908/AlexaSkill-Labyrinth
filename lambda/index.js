@@ -50,7 +50,7 @@ const languageStrings = {
       CHECKPOINT_FOUND_MESSAGE: 'Encontrado el checkpoint llamado %s. Regresando a la posicion %s %s',
       CHECKPOINT_CREATED_MESSAGE: 'Se ha creado un checkpoint llamado %s en la coordenada x igual %s y en la coordenada y igual %s. Tienes %s checkpoints',
       PLAYER_SURROUNDINGS_MESSAGE: '. A tu derecha tienes un%s. Delante hay un%s. A tu izquierda, un%s. Detrás de ti, hay un%s',
-      STEPPED_OBJECT_MESSAGE: '. Te encuentras encima de un objeto',
+      STEPPED_OBJECT_MESSAGE: '. Te encuentras encima de un objeto%s',
       REACHED_GOAL_MESSAGE: '¡Felicidades has llegado a la meta! El laberinto se va a autodestruir.',
       CANT_MOVE_MESSAGE: 'No te puede mover hacia %s porque hay un muro',
       MOVE_MESSAGE: 'Te mueves hacia %s',
@@ -159,10 +159,10 @@ const NewWorldIntentHandler = {
         }
         let contador = count.toString();
         //let speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
-        let speakOutput = requestAttributes.t('ENTER_LABYRINTH');
+        //let speakOutput = requestAttributes.t('ENTER_LABYRINTH');
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_START_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language));
+        let speakOutput = requestAttributes.t('ENTER_LABYRINTH'+'PLAYER_SURROUNDINGS_START_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language));
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -220,10 +220,10 @@ const RestartWorldIntentHandler = {
         }
         let contador = count.toString();
         //let speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
-        let speakOutput = requestAttributes.t('RESTART_LABYRINTH');
+        //let speakOutput = requestAttributes.t('RESTART_LABYRINTH');
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
+        let speakOutput = requestAttributes.t('RESTART_LABYRINTH'+'PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -241,6 +241,7 @@ const AnswerDirectionIntentHandler = {
         const language = handlerInput.requestEnvelope.request.locale;
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
+        let can_move = false;
         if (CurrentWorld == null){
             let speakOutput = requestAttributes.t('MISSING_WORLD_MESSAGE');
             return handlerInput.responseBuilder
@@ -248,14 +249,13 @@ const AnswerDirectionIntentHandler = {
                 .reprompt(speakOutput)
                 .getResponse();
         }
-        let speakOutput
+        let speakOutput;
         let direction_wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package,language);
         CurrentWorld = direction_wrapper[0];
         player_position_package = direction_wrapper[1];
         if (direction_wrapper[2]){
-            speakOutput = requestAttributes.t('MOVE_MESSAGE',AnswerValue)
+            can_move = true;
         }
-        else speakOutput = requestAttributes.t('CANT_MOVE_MESSAGE',AnswerValue)
         if (player_position_package.player_pointer_x == end_x && player_position_package.player_pointer_y == end_y){
             speakOutput = requestAttributes.t('REACHED_GOAL_MESSAGE')
             CurrentWorld = null;
@@ -267,10 +267,18 @@ const AnswerDirectionIntentHandler = {
         //speakOutput += ' X:'+ player_position_package.player_pointer_x.toString() + ' Y:' + player_position_package.player_pointer_y.toString() + ' Orientacion: ' + player_position_package.player_orientation.toString();
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        if (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H'){
-            speakOutput += requestAttributes.t('STEPPED_OBJECT_MESSAGE')
+        if (can_move){
+            speakOutput = requestAttributes.t('MOVE_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',AnswerValue,worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language))
         }
-        speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
+        if (can_move && (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H')){
+            speakOutput = requestAttributes.t('MOVE_MESSAGE'+'STEPPED_OBJECT_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',AnswerValue,'',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language))
+        }
+        if (!can_move){
+            speakOutput = requestAttributes.t('CANT_MOVE_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',AnswerValue,worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language))
+        }
+        if (!can_move && (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H')){
+            speakOutput = requestAttributes.t('CANT_MOVE_MESSAGE'+'STEPPED_OBJECT_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',AnswerValue,'',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language))
+        }
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -332,15 +340,19 @@ const ReturnToCheckpointIntentHandler = {
         }
         let speakOutput;
         if (found_checkpoint){
-            speakOutput = requestAttributes.t('CHECKPOINT_FOUND_MESSAGE',AnswerValue,player_position_package.player_pointer_x.toString(),player_position_package.player_pointer_y.toString());
+            //speakOutput = requestAttributes.t('CHECKPOINT_FOUND_MESSAGE',AnswerValue,player_position_package.player_pointer_x.toString(),player_position_package.player_pointer_y.toString());
             
         }
         else {
             speakOutput = requestAttributes.t('CHECKPOINT_NOT_FOUND_MESSAGE',AnswerValue);
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
         }
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
+        speakOutput += requestAttributes.t('CHECKPOINT_FOUND_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',AnswerValue,player_position_package.player_pointer_x.toString(),player_position_package.player_pointer_y.toString(),worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -369,14 +381,13 @@ const InventoryIntentHandler = {
             speakOutput = requestAttributes.t('EMPTY_INVENTORY_MESSAGE');
         }
         else {
-            speakOutput = requestAttributes.t('HAVE_MESSAGE');
             for (let i = 0; i < inventory_wrapper[0].length ; i++){
                 switch(inventory_wrapper[0][i]){
                     case 'H':
-                        speakOutput += requestAttributes.t('A_HATCHET_MESSAGE');
+                        speakOutput = requestAttributes.t('HAVE_MESSAGE'+'A_HATCHET_MESSAGE');
                         break;
                     case 'B':
-                        speakOutput += requestAttributes.t('A_BOMB_MESSAGE');
+                        speakOutput = requestAttributes.t('HAVE_MESSAGE'+'A_BOMB_MESSAGE');
                         break;
                 }
             }
@@ -552,7 +563,7 @@ const SituationIntentHandler = {
         }
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
+        let speakOutput = requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
