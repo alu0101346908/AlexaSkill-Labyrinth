@@ -97,6 +97,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
     let outofbounds_y = false;
     let outofbounds_y_0 = false;
     let outofbounds_x_0 = false;
+    let valid = false;
     if (player_position_package.player_pointer_y + 1 > CurrentWorld[0].length){
         outofbounds_y = true;
     }
@@ -115,24 +116,28 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
+                valid = true;
                 break;
             }
             break;
@@ -141,24 +146,28 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
+                valid = true;
                 break;
             }
             break;
@@ -169,24 +178,28 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'N';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
+                valid = true;
                 break;
             }
             break;
@@ -196,29 +209,33 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 //CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
                 player_position_package.player_orientation = 'N';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'N' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += 1;
                 player_position_package.player_orientation = 'S';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'E' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
                 player_position_package.player_orientation = 'O';
+                valid = true;
                 break;
             }
             if (player_position_package.player_orientation == 'O' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
                 player_position_package.player_orientation = 'E';
+                valid = true;
                 break;
             }
             break;
     } 
-    return [CurrentWorld, player_position_package];
+    return [CurrentWorld, player_position_package, valid];
 }
 
 
