@@ -186,7 +186,7 @@ const AnswerDirectionIntentHandler = {
         if (direction_wrapper[2]){
             speakOutput = 'Te mueves hacia ' + AnswerValue;
         }
-        else speakOutput = 'No te puede mover hacia ' + AnswerValue;
+        else speakOutput = 'No te puede mover hacia ' + AnswerValue + ' porque hay un muro';
         if (player_position_package.player_pointer_x == end_x && player_position_package.player_pointer_y == end_y){
             speakOutput = "¡Felicidades has llegado a la meta! El laberinto se va a autodestruir.";
             CurrentWorld = null;
