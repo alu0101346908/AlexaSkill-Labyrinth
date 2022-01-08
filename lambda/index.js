@@ -179,10 +179,14 @@ const AnswerDirectionIntentHandler = {
                 .reprompt(speakOutput)
                 .getResponse();
         }
-        let speakOutput = 'Te mueves hacia ' + AnswerValue;
+        let speakOutput
         let direction_wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
         CurrentWorld = direction_wrapper[0];
         player_position_package = direction_wrapper[1];
+        if (direction_wrapper[2]){
+            speakOutput = 'Te mueves hacia ' + AnswerValue;
+        }
+        else speakOutput = 'No te puede mover hacia ' + AnswerValue;
         if (player_position_package.player_pointer_x == end_x && player_position_package.player_pointer_y == end_y){
             speakOutput = "¡Felicidades has llegado a la meta! El laberinto se va a autodestruir.";
             CurrentWorld = null;
