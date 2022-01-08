@@ -152,7 +152,7 @@ const RestartWorldIntentHandler = {
         }
         let contador = count.toString();
         //let speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
-        let speakOutput = "Entras en el laberinto";
+        let speakOutput = "Se ha creado un nuevo laberinto. Entras en el laberinto";
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
         speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right) + ". Delante, tienes un" + worldmodule.SymbolToString(front) + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left) + ". Detrás de ti está la entrada.";
