@@ -103,7 +103,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package, la
         case 'en-GB':
             derecha = 'right'
             izquierda = 'left'
-            delante = 'front'
+            delante = 'ahead'
             atras = 'behind'
         case 'es-ES':
             derecha = 'derecha'
