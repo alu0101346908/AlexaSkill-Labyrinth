@@ -162,7 +162,9 @@ const NewWorldIntentHandler = {
         //let speakOutput = requestAttributes.t('ENTER_LABYRINTH');
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        let speakOutput = requestAttributes.t('ENTER_LABYRINTH'+'PLAYER_SURROUNDINGS_START_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language));
+        let dummy_string1 = requestAttributes.t('ENTER_LABYRINTH');
+        let dummy_string2 = requestAttributes.t('PLAYER_SURROUNDINGS_START_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language));
+        let speakOutput = dummy_string1 + dummy_string2;
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
