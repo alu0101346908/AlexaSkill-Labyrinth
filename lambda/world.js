@@ -91,13 +91,26 @@ function World(i,j) {
     
 }
 
-function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
+function ManageDirection (AnswerValue, CurrentWorld, player_position_package, language){
     let SpeakOutput;
     let outofbounds_x = false;
     let outofbounds_y = false;
     let outofbounds_y_0 = false;
     let outofbounds_x_0 = false;
     let valid = false;
+    let derecha, izquierda, delante, atras
+    switch (language){
+        case 'en':
+            derecha = 'right'
+            izquierda = 'left'
+            delante = 'front'
+            atras = 'behind'
+        case 'es':
+            derecha = 'derecha'
+            izquierda = 'izquierda'
+            delante = 'delante'
+            atras = 'atras'
+    }
     if (player_position_package.player_pointer_y + 1 > CurrentWorld[0].length){
         outofbounds_y = true;
     }
@@ -111,7 +124,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
         outofbounds_y_0 = true;
     }
     switch (AnswerValue){
-        case 'derecha':
+        case derecha:
             if (player_position_package.player_orientation == 'S' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1].push('J');
                 player_position_package.player_pointer_y += -1;
@@ -141,7 +154,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
                 break;
             }
             break;
-        case 'izquierda':
+        case izquierda:
             if (player_position_package.player_orientation == 'S' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1].push('J');
                 player_position_package.player_pointer_y += 1;
@@ -172,7 +185,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
             }
             break;
         case 'adelante':
-        case 'delante':
+        case delante:
         case 'alante':
             if (player_position_package.player_orientation == 'S' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y].push('J');
@@ -204,7 +217,7 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
             }
             break;
         case 'detras':
-        case 'atras':
+        case atras:
             if (player_position_package.player_orientation == 'S' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] != 'X'){
                 //CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y].push('J');
                 player_position_package.player_pointer_x += -1;
@@ -239,13 +252,26 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package){
 }
 
 
-function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package){
+function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package, language){
     let SpeakOutput;
     let outofbounds_x = false;
     let outofbounds_y = false;
     let outofbounds_y_0 = false;
     let outofbounds_x_0 = false;
     let success = false;
+    let derecha, izquierda, delante, atras
+    switch (language){
+        case 'en':
+            derecha = 'right'
+            izquierda = 'left'
+            delante = 'front'
+            atras = 'behind'
+        case 'es':
+            derecha = 'derecha'
+            izquierda = 'izquierda'
+            delante = 'delante'
+            atras = 'atras'
+    }
     if (player_position_package.player_pointer_y + 1 > CurrentWorld[0].length){
         outofbounds_y = true;
     }
@@ -259,7 +285,7 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package)
         outofbounds_y_0 = true;
     }
     switch (AnswerValue){
-        case 'derecha':
+        case derecha:
             if (player_position_package.player_orientation == 'S' && outofbounds_y_0 == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y - 1] = '0';
                 success = true;
@@ -281,7 +307,7 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package)
                 break;
             }
             break;
-        case 'izquierda':
+        case izquierda:
             if (player_position_package.player_orientation == 'S' && outofbounds_y == false && CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y + 1] = '0';
                 success = true;
@@ -304,7 +330,7 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package)
             }
             break;
         case 'adelante':
-        case 'delante':
+        case delante:
         case 'alante':
             if (player_position_package.player_orientation == 'S' && outofbounds_x == false && CurrentWorld[player_position_package.player_pointer_x + 1][player_position_package.player_pointer_y] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x+1][player_position_package.player_pointer_y] = '0';
@@ -328,7 +354,7 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package)
             }
             break;
         case 'detras':
-        case 'atras':
+        case atras:
             if (player_position_package.player_orientation == 'S' && outofbounds_x_0 == false && CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] == 'A'){
                 CurrentWorld[player_position_package.player_pointer_x - 1][player_position_package.player_pointer_y] = '0';
                 success = true;
@@ -402,31 +428,55 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package)
         }
     return [left,right,front,behind];
  }
- function SymbolToString(symbol){
+ function SymbolToString(symbol,language){
     if (Array.isArray(symbol)){
         symbol = symbol[0];
     }
-    switch (symbol){
-        case 'X':
-            symbol = " muro"
-        break;
-        case 'H':
-            symbol = " hacha"
-        break;
-        case 'F':
-            symbol = "a salida"
-        break;
-        case 'A':
-            symbol = " arbusto"
-        break;
-        case '0':
-            symbol = " camino"
-        break;
-        case 'I':
-            symbol = " inicio"
-        break;
+    if (language === 'es'){
+        switch (symbol){
+            case 'X':
+                symbol = " muro"
+            break;
+            case 'H':
+                symbol = " hacha"
+            break;
+            case 'F':
+                symbol = "a salida"
+            break;
+            case 'A':
+                symbol = " arbusto"
+            break;
+            case '0':
+                symbol = " camino"
+            break;
+            case 'I':
+                symbol = " inicio"
+            break;
+        }
+        return symbol;
     }
-    return symbol;
+    if (language === 'en')
+        switch (symbol){
+            case 'X':
+                symbol = " wall"
+            break;
+            case 'H':
+                symbol = " hatchet"
+            break;
+            case 'F':
+                symbol = " exit"
+            break;
+            case 'A':
+                symbol = " bush"
+            break;
+            case '0':
+                symbol = " way"
+            break;
+            case 'I':
+                symbol = " start"
+            break;
+        }
+        return symbol;
  }
 
 module.exports = {
