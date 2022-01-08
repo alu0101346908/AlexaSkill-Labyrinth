@@ -5,6 +5,39 @@
  * */
 const Alexa = require('ask-sdk-core');
 
+
+// i18n dependencies. i18n is the main module, sprintf allows us to include variables with '%s'.
+const i18n = require('i18next');
+const sprintf = require('i18next-sprintf-postprocessor');
+
+// We create a language strings object containing all of our strings. 
+// The keys for each string will then be referenced in our code
+// e.g. requestAttributes.t('WELCOME')
+const languageStrings = {
+  en: {
+    translation: {
+      WELCOME_MESSAGE: 'Welcome, you can say Hello or Help. Which would you like to try?',
+      HELLO_MESSAGE: 'Hello World!',
+      HELP_MESSAGE: 'You can say hello to me! How can I help?',
+      GOODBYE_MESSAGE: 'Goodbye!',
+      REFLECTOR_MESSAGE: 'You just triggered %s',
+      FALLBACK_MESSAGE: 'Sorry, I don\'t know about that. Please try again.',
+      ERROR_MESSAGE: 'Sorry, there was an error. Please try again.'
+    }
+  },
+  es:{
+    translation: {
+      WELCOME_MESSAGE: 'Bienvenido, puedes decir Hola o Ayuda. Cual prefieres?',
+      HELLO_MESSAGE: 'Hola Mundo!',
+      HELP_MESSAGE: 'Puedes decirme hola. Cómo te puedo ayudar?',
+      GOODBYE_MESSAGE: 'Adiós!',
+      REFLECTOR_MESSAGE: 'Acabas de activar %s',
+      FALLBACK_MESSAGE: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
+      ERROR_MESSAGE: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
+    }
+  }
+}
+
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
@@ -574,6 +607,38 @@ const ErrorHandler = {
     }
 };
 
+// This request interceptor will log all incoming requests to this lambda
+const LoggingRequestInterceptor = {
+    process(handlerInput) {
+        console.log(`Incoming request: ${JSON.stringify(handlerInput.requestEnvelope.request)}`);
+    }
+};
+
+// This response interceptor will log all outgoing responses of this lambda
+const LoggingResponseInterceptor = {
+    process(handlerInput, response) {
+      console.log(`Outgoing response: ${JSON.stringify(response)}`);
+    }
+};
+
+// This request interceptor will bind a translation function 't' to the requestAttributes.
+const LocalizationInterceptor = {
+  process(handlerInput) {
+    const localizationClient = i18n.use(sprintf).init({
+      lng: handlerInput.requestEnvelope.request.locale,
+      fallbackLng: 'en',
+      overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
+      resources: languageStrings,
+      returnObjects: true
+    });
+
+    const attributes = handlerInput.attributesManager.getRequestAttributes();
+    attributes.t = function (...args) {
+      return localizationClient.t(...args);
+    }
+  }
+}
+
 /**
  * This handler acts as the entry point for your skill, routing all request and response
  * payloads to the handlers above. Make sure any new handlers or interceptors you've
@@ -599,5 +664,10 @@ exports.handler = Alexa.SkillBuilders.custom()
         IntentReflectorHandler)
     .addErrorHandlers(
         ErrorHandler)
+    .addRequestInterceptors(
+        LocalizationInterceptor,
+        LoggingRequestInterceptor)
+    .addResponseInterceptors(
+        LoggingResponseInterceptor)
     .withCustomUserAgent('sample/hello-world/v1.2')
     .lambda();
