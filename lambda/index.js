@@ -225,7 +225,9 @@ const RestartWorldIntentHandler = {
         //let speakOutput = requestAttributes.t('RESTART_LABYRINTH');
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        let speakOutput = requestAttributes.t('RESTART_LABYRINTH_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
+        let dummy_string1 = requestAttributes.t('RESTART_LABYRINTH_MESSAGE');
+        let dummy_string2 = requestAttributes.t('PLAYER_SURROUNDINGS_START_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language));
+        let speakOutput = dummy_string1 + dummy_string2
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -255,11 +257,14 @@ const AnswerDirectionIntentHandler = {
         let direction_wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package,language);
         CurrentWorld = direction_wrapper[0];
         player_position_package = direction_wrapper[1];
+        let dummy_string1 = '';
+        let dummy_string2 = '';
         if (direction_wrapper[2]){
-            can_move = true;
+            dummy_string1 = requestAttributes.t('MOVE_MESSAGE',AnswerValue);
         }
+        else dummy_string2 = requestAttributes.t('CANT_MOVE_MESSAGE');
         if (player_position_package.player_pointer_x == end_x && player_position_package.player_pointer_y == end_y){
-            speakOutput = requestAttributes.t('REACHED_GOAL_MESSAGE')
+            speakOutput = requestAttributes.t('REACHED_GOAL_MESSAGE');
             CurrentWorld = null;
             return handlerInput.responseBuilder
                 .speak(speakOutput)
@@ -269,18 +274,13 @@ const AnswerDirectionIntentHandler = {
         //speakOutput += ' X:'+ player_position_package.player_pointer_x.toString() + ' Y:' + player_position_package.player_pointer_y.toString() + ' Orientacion: ' + player_position_package.player_orientation.toString();
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        if (can_move){
-            speakOutput = requestAttributes.t('MOVE_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',AnswerValue,worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language))
+        let dummy_string3 = ''
+        if (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H'){
+            dummy_string3 = requestAttributes.t('STEPPED_OBJECT_MESSAGE');
         }
-        if (can_move && (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H')){
-            speakOutput = requestAttributes.t('MOVE_MESSAGE'+'STEPPED_OBJECT_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',AnswerValue,'',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language))
-        }
-        if (!can_move){
-            speakOutput = requestAttributes.t('CANT_MOVE_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',AnswerValue,worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language))
-        }
-        if (!can_move && (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H')){
-            speakOutput = requestAttributes.t('CANT_MOVE_MESSAGE'+'STEPPED_OBJECT_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',AnswerValue,'',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language))
-        }
+        let dummy_string4 = requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
+
+        speakOutput = dummy_string1 + dummy_string2 + dummy_string3 + dummy_string4
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -354,7 +354,9 @@ const ReturnToCheckpointIntentHandler = {
         }
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput += requestAttributes.t('CHECKPOINT_FOUND_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',AnswerValue,player_position_package.player_pointer_x.toString(),player_position_package.player_pointer_y.toString(),worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
+        let dummy_string1 = requestAttributes.t('CHECKPOINT_FOUND_MESSAGE',AnswerValue);
+        let dummy_string2 = requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',player_position_package.player_pointer_x.toString(),player_position_package.player_pointer_y.toString(),worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
+        speakOutput = dummy_string1 + dummy_string2 
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -379,17 +381,22 @@ const InventoryIntentHandler = {
         }
         // CODIGO
         let speakOutput;
+        let dummy_string1;
+        let dummy_string2;
         if (inventory_wrapper.length === 0){
             speakOutput = requestAttributes.t('EMPTY_INVENTORY_MESSAGE');
         }
         else {
+            dummy_string1 = requestAttributes.t('HAVE_MESSAGE');
             for (let i = 0; i < inventory_wrapper[0].length ; i++){
                 switch(inventory_wrapper[0][i]){
                     case 'H':
-                        speakOutput = requestAttributes.t('HAVE_MESSAGE'+'A_HATCHET_MESSAGE');
+                        dummy_string2 = requestAttributes.t('A_HATCHET_MESSAGE');
+                        speakOutput = dummy_string1 + dummy_string2;
                         break;
                     case 'B':
-                        speakOutput = requestAttributes.t('HAVE_MESSAGE'+'A_BOMB_MESSAGE');
+                        dummy_string2 = requestAttributes.t('A_BOMB_MESSAGE_MESSAGE');
+                        speakOutput = dummy_string1 + dummy_string2;
                         break;
                 }
             }
