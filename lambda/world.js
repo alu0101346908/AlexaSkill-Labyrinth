@@ -264,7 +264,7 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package,
         case 'en-GB':
             derecha = 'right'
             izquierda = 'left'
-            delante = 'front'
+            delante = 'ahead'
             atras = 'behind'
         case 'es-ES':
             derecha = 'derecha'
@@ -381,23 +381,23 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package,
 }
 
  function Surroundings(CurrentWorld, player){
-    let left, right, front, behind;
+    let left, right, ahead, behind;
     let x = player.player_pointer_x;
     let y = player.player_pointer_y;
         switch (player.player_orientation){
         case 'N':
             if (x+1 < CurrentWorld.length) behind = CurrentWorld[x+1][y];
             else behind = 'X';
-            if (x-1 >= 0) front = CurrentWorld[x-1][y];
-            else front = 'X';
+            if (x-1 >= 0) ahead = CurrentWorld[x-1][y];
+            else ahead = 'X';
             if (y-1 >= 0) left = CurrentWorld[x][y-1];
             else left = 'X';
             if (y+1 < CurrentWorld.length) right = CurrentWorld[x][y+1];
             else right = 'X';
             break;    
         case 'S':
-            if (x+1 < CurrentWorld.length) front = CurrentWorld[x+1][y];
-            else front = 'X';
+            if (x+1 < CurrentWorld.length) ahead = CurrentWorld[x+1][y];
+            else ahead = 'X';
             if (x-1 >= 0) behind = CurrentWorld[x-1][y];
             else behind = 'X';
             if (y-1 >= 0) right = CurrentWorld[x][y-1];
@@ -410,8 +410,8 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package,
             else left = 'X';
             if (x-1 >= 0) right = CurrentWorld[x-1][y];
             else right = 'X';
-            if (y-1 >= 0) front = CurrentWorld[x][y-1];
-            else front = 'X';
+            if (y-1 >= 0) ahead = CurrentWorld[x][y-1];
+            else ahead = 'X';
             if (y+1 < CurrentWorld.length) behind = CurrentWorld[x][y+1];
             else behind = 'X';
             break;
@@ -422,11 +422,11 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package,
             else left = 'X';
             if (y-1 >= 0) behind = CurrentWorld[x][y-1];
             else behind = 'X';
-            if (y+1 < CurrentWorld.length) front = CurrentWorld[x][y+1];
-            else front = 'X';
+            if (y+1 < CurrentWorld.length) ahead = CurrentWorld[x][y+1];
+            else ahead = 'X';
             break;
         }
-    return [left,right,front,behind];
+    return [left,right,ahead,behind];
  }
  function SymbolToString(symbol,language){
     if (Array.isArray(symbol)){
