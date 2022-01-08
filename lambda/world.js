@@ -100,12 +100,12 @@ function ManageDirection (AnswerValue, CurrentWorld, player_position_package, la
     let valid = false;
     let derecha, izquierda, delante, atras
     switch (language){
-        case 'en':
+        case 'en-GB':
             derecha = 'right'
             izquierda = 'left'
             delante = 'front'
             atras = 'behind'
-        case 'es':
+        case 'es-ES':
             derecha = 'derecha'
             izquierda = 'izquierda'
             delante = 'delante'
@@ -261,12 +261,12 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package,
     let success = false;
     let derecha, izquierda, delante, atras
     switch (language){
-        case 'en':
+        case 'en-GB':
             derecha = 'right'
             izquierda = 'left'
             delante = 'front'
             atras = 'behind'
-        case 'es':
+        case 'es-ES':
             derecha = 'derecha'
             izquierda = 'izquierda'
             delante = 'delante'
@@ -432,7 +432,7 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package,
     if (Array.isArray(symbol)){
         symbol = symbol[0];
     }
-    if (language === 'es'){
+    if (language === 'es-ES'){
         switch (symbol){
             case 'X':
                 symbol = " muro"
@@ -455,7 +455,7 @@ function UseObjectDirection (AnswerValue, CurrentWorld, player_position_package,
         }
         return symbol;
     }
-    if (language === 'en')
+    if (language === 'en-GB')
         switch (symbol){
             case 'X':
                 symbol = " wall"
