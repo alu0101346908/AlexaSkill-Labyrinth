@@ -132,7 +132,7 @@ const NewWorldIntentHandler = {
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
         speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,'es') + ". Delante, tienes un" + worldmodule.SymbolToString(front,'es') + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left,'es') + ". Detrás de ti está la entrada.";
-        speakOutput = handlerInput.requestEnvelope.request.language;
+        speakOutput = handlerInput.requestEnvelope.request.locale;
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
