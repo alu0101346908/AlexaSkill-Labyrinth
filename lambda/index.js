@@ -123,18 +123,19 @@ const NewWorldIntentHandler = {
         let count = 0;
         let countobstacle = 0;
         switch (AnswerValue){
+            case 'small':
             case 'pequeño':
                 CurrentWorld = worldmodule.World(4,4);
                 end_x = 4-1;
                 end_y = 4-1;
                 break;
-
+            case 'medium':
             case 'mediano':
                 CurrentWorld = worldmodule.World(6,6);
                 end_x = 6-1;
                 end_y = 6-1;
                 break;
-
+            case 'big':
             case 'grande':
                 CurrentWorld = worldmodule.World(8,8);
                 end_x = 8-1;
@@ -186,18 +187,19 @@ const RestartWorldIntentHandler = {
         let countobstacle = 0;
         CurrentWorld = null
         switch (AnswerValue){
+            case 'small':
             case 'pequeño':
                 CurrentWorld = worldmodule.World(4,4);
                 end_x = 4-1;
                 end_y = 4-1;
                 break;
-
+            case 'medium':
             case 'mediano':
                 CurrentWorld = worldmodule.World(6,6);
                 end_x = 6-1;
                 end_y = 6-1;
                 break;
-
+            case 'big':
             case 'grande':
                 CurrentWorld = worldmodule.World(8,8);
                 end_x = 8-1;
@@ -440,11 +442,12 @@ const UseObjectIntentHandler = {
         else{
             for (let i = 0; i < inventory_wrapper[0].length; i++){
                 switch(AnswerValue){
-                    case 'espada':
+                    case 'hatchet':
                     case 'hacha':
                         object_found = true
                         object_index = i
                     case 'bomba':
+                    case 'bomb'
                         object_found = true
                         object_index = i
                 }
