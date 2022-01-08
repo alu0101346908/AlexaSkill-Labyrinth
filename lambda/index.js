@@ -16,10 +16,11 @@ const sprintf = require('i18next-sprintf-postprocessor');
 const languageStrings = {
   en: {
     translation: {
-      WELCOME_MESSAGE: 'Welcome, you can say Hello or Help. Which would you like to try?',
-      HELLO_MESSAGE: 'Hello World!',
-      HELP_MESSAGE: 'You can say hello to me! How can I help?',
-      GOODBYE_MESSAGE: 'Goodbye!',
+      WELCOME_MESSAGE: '?',
+      HELLO_MESSAGE: '',
+      HELP_MESSAGE: '',
+      WORLD_EXIST: '',
+      GOODBYE_MESSAGE: '',
       REFLECTOR_MESSAGE: 'You just triggered %s',
       FALLBACK_MESSAGE: 'Sorry, I don\'t know about that. Please try again.',
       ERROR_MESSAGE: 'Sorry, there was an error. Please try again.'
@@ -27,13 +28,41 @@ const languageStrings = {
   },
   es:{
     translation: {
-      WELCOME_MESSAGE: 'Bienvenido, puedes decir Hola o Ayuda. Cual prefieres?',
+      WELCOME_MESSAGE: 'Bienvenido a la prueba del laberinto. Prepara un desafío.',
       HELLO_MESSAGE: 'Hola Mundo!',
+      WORLD_EXIST_MESSAGE: 'Ya existe un mundo, si quieres reiniciar di reinicia mundo, si quieres crear uno nuevo vuelve a decir crea mundo',
       HELP_MESSAGE: 'Puedes decirme hola. Cómo te puedo ayudar?',
+      ENTER_LABERYNTH_MESSAGE: 'Entras en el laberinto',
+      MISSING_WORLD_MESSAGE : 'No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande',
+      NOT_A_OBJECT_MESSAGE: 'No estas sobre ningun objeto, muevete hacia la casilla donde se encuentre y vuelve a intentarlo',
+      FOUND_BOMB_MESSAGE: 'Has encontrado una bomba, la recojes',
+      FOUND_HATCHET_MESSAGE: 'Has encontrado un hacha, la recojes',
+      CANT_USE_OBJECT_MESSAGE: 'No se puede realizar dicha acción, vuelve a intentarlo',
+      NOT_A_BUSH_MESSAGE: 'No hay ningun arbusto en la direccion %s',
+      USED_HATCHET_MESSAGE: 'Se ha usado el hacha para eliminar el arbusto en la direccion %s',
+      MISSING_OBJECT_MESSAGE: 'No dispones del objeto %s intentalo de nuevo.',
+      USE_OBJECT_MESSAGE: '¿En que direccion quieres usar el objeto? ',
+      EMPTY_INVENTORY_MESSAGE: 'El inventario está vacio, primero consigue un objeto',
+      A_HATCHET_MESSAGE: 'un hacha ',
+      A_BOMB_MESSAGE: 'una bomba ',
+      HAVE_MESSAGE: 'Tienes ',
+      CHECKPOINT_NOT_FOUND_MESSAGE: 'No se ha encontrado el checkpoint llamado %s',
+      CHECKPOINT_FOUND_MESSAGE: 'Encontrado el checkpoint llamado %s. Regresando a la posicion %s %s',
+      CHECKPOINT_CREATED_MESSAGE: 'Se ha creado un checkpoint llamado %s en la coordenada x igual %s y en la coordenada y igual %s. Tienes %s checkpoints',
+      PLAYER_SURROUNDINGS_MESSAGE: '. A tu derecha tienes un%s. Delante hay un%s. A tu izquierda, un%s. Detrás de ti, hay un%s',
+      STEPPED_OBJECT_MESSAGE: '. Te encuentras encima de un objeto',
+      REACHED_GOAL_MESSAGE: '¡Felicidades has llegado a la meta! El laberinto se va a autodestruir.',
+      CANT_MOVE_MESSAGE: 'No te puede mover hacia %s porque hay un muro',
+      MOVE_MESSAGE: 'Te mueves hacia %s',
+      RESTART_LABERYNTH: 'Se ha creado un nuevo laberinto. Entras en el laberinto',
+      UNSUPPORTED_SIZE_MESSAGE: 'Tamaño de mundo no soportado, prueba con pequeño, mediano y grande',
+      PLAYER_SURROUNDINGS_START_MESSAGE: '. A tu derecha tienes un %s. Delante, tienes un %s. A tu izquierda, hay un %s. Detrás de ti está la entrada.',
+      LABERYNTH_HELP_MESSAGE: 'Oigo tu súplica, ¿cómo puedo guiar tu camino?',
       GOODBYE_MESSAGE: 'Adiós!',
       REFLECTOR_MESSAGE: 'Acabas de activar %s',
-      FALLBACK_MESSAGE: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
-      ERROR_MESSAGE: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
+      CANCEL_MESSAGE: 'Te has rendido ante el laberinto.',
+      FALLBACK_MESSAGE: 'Tu voz se pierde tras los muros. ¿Puedes repetir tus palabras?',
+      ERROR_MESSAGE: 'No he podido acatar tu orden. Si me lo pides de nuevo, volveré a intentarlo.'
     }
   }
 }
@@ -43,7 +72,8 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Bienvenido a la prueba del laberinto. Prepara un desafío.';
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const speakOutput = requestAttributes.t('WELCOME_MESSAGE');
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -75,8 +105,9 @@ const NewWorldIntentHandler = {
     },
     handle(handlerInput) {
         const language = handlerInput.requestEnvelope.request.locale;
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         if (CurrentWorld !== null && tryagain == false){
-            const speakOutput = 'Ya existe un mundo, si quieres reiniciar di reinicia mundo, si quieres crear uno nuevo vuelve a decir crea mundo';
+            const speakOutput = requestAttributes.t('WORLD_EXIST');
             tryagain = true;
             return handlerInput.responseBuilder
                 .speak(speakOutput)
@@ -111,7 +142,7 @@ const NewWorldIntentHandler = {
                 break;
 
             default:
-                const speakOutput = 'Tamaño de mundo no soportado, prueba con pequeño, mediano y grande';
+                const speakOutput = requestAttributes.t('UNSUPPORTED_SIZE_MESSAGE');
                 return handlerInput.responseBuilder
                     .speak(speakOutput)
                     .reprompt(speakOutput)
@@ -128,10 +159,10 @@ const NewWorldIntentHandler = {
         }
         let contador = count.toString();
         //let speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
-        let speakOutput = "Entras en el laberinto";
+        let speakOutput = requestAttributes.t('ENTER_LABERYNTH');
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,language) + ". Delante, tienes un" + worldmodule.SymbolToString(front,language) + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left,language) + ". Detrás de ti está la entrada.";
+        speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_START_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language));
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -147,6 +178,7 @@ const RestartWorldIntentHandler = {
     },
     handle(handlerInput) {
         const language = handlerInput.requestEnvelope.request.locale;
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
         let count = 0;
         let countobstacle = 0;
@@ -171,7 +203,7 @@ const RestartWorldIntentHandler = {
                 break;
 
             default:
-                const speakOutput = 'Tamaño de mundo no soportado, prueba con pequeño, mediano y grande';
+                const speakOutput = requestAttributes.t('UNSUPPORTED_SIZE_MESSAGE');
                 return handlerInput.responseBuilder
                     .speak(speakOutput)
                     .reprompt(speakOutput)
@@ -188,10 +220,10 @@ const RestartWorldIntentHandler = {
         }
         let contador = count.toString();
         //let speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
-        let speakOutput = "Se ha creado un nuevo laberinto. Entras en el laberinto";
+        let speakOutput = requestAttributes.t('RESTART_LABERYNTH');
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,language) + ". Delante, tienes un" + worldmodule.SymbolToString(front,language) + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left,language) + ". Detrás de ti está la entrada.";
+        speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -207,9 +239,10 @@ const AnswerDirectionIntentHandler = {
     },
     handle(handlerInput) {
         const language = handlerInput.requestEnvelope.request.locale;
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         if (CurrentWorld == null){
-            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            let speakOutput = requestAttributes.t('MISSING_WORLD_MESSAGE');
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -220,11 +253,11 @@ const AnswerDirectionIntentHandler = {
         CurrentWorld = direction_wrapper[0];
         player_position_package = direction_wrapper[1];
         if (direction_wrapper[2]){
-            speakOutput = 'Te mueves hacia ' + AnswerValue;
+            speakOutput = requestAttributes.t('MOVE_MESSAGE',AnswerValue)
         }
-        else speakOutput = 'No te puede mover hacia ' + AnswerValue + ' porque hay un muro';
+        else speakOutput = requestAttributes.t('CANT_MOVE_MESSAGE',AnswerValue)
         if (player_position_package.player_pointer_x == end_x && player_position_package.player_pointer_y == end_y){
-            speakOutput = "¡Felicidades has llegado a la meta! El laberinto se va a autodestruir.";
+            speakOutput = requestAttributes.t('REACHED_GOAL_MESSAGE')
             CurrentWorld = null;
             return handlerInput.responseBuilder
                 .speak(speakOutput)
@@ -235,9 +268,9 @@ const AnswerDirectionIntentHandler = {
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
         if (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H'){
-            speakOutput += "." + " Te encuentras encima de un objeto"
+            speakOutput += requestAttributes.t('STEPPED_OBJECT_MESSAGE')
         }
-        speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,language) + ". Delante hay un" + worldmodule.SymbolToString(front,language) + ". A tu izquierda, un" + worldmodule.SymbolToString(left,language) + ". Detrás de ti, hay un" + worldmodule.SymbolToString(behind,language)
+        speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -254,9 +287,10 @@ const PutCheckpointIntentHandler = {
     },
     handle(handlerInput) {
         const language = handlerInput.requestEnvelope.request.locale;
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
-        if (CurrentWorld == null){
-            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+        if (CurrentWorld === null){
+            let speakOutput = requestAttributes.t('MISSING_WORLD_MESSAGE');
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -264,7 +298,7 @@ const PutCheckpointIntentHandler = {
         }
         let NewCheckPoint = playermodule.Checkpoint(AnswerValue, player_position_package.player_pointer_x, player_position_package.player_pointer_y);
         checkpoint_wrapper.push(NewCheckPoint);
-        const speakOutput = 'Se ha creado un checkpoint llamado ' + NewCheckPoint.name + " en la coordenada x igual " + player_position_package.player_pointer_x.toString() + " y en la coordenada y igual " + player_position_package.player_pointer_y.toString() + ". Tienes " + checkpoint_wrapper.length + " checkpoints";
+        const speakOutput = requestAttributes.t('CHECKPOINT_CREATED_MESSAGE',NewCheckPoint.name,player_position_package.player_pointer_x.toString(),player_position_package.player_pointer_y.toString(),checkpoint_wrapper.length);
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -280,9 +314,10 @@ const ReturnToCheckpointIntentHandler = {
     handle(handlerInput) {
         let found_checkpoint = false;
         const language = handlerInput.requestEnvelope.request.locale;
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
-        if (CurrentWorld == null){
-            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+        if (CurrentWorld === null){
+            let speakOutput = requestAttributes.t('MISSING_WORLD_MESSAGE');
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -297,14 +332,15 @@ const ReturnToCheckpointIntentHandler = {
         }
         let speakOutput;
         if (found_checkpoint){
-            speakOutput = "Encontrado el checkpoint llamado " + AnswerValue + ". Regresando a la posicion " + player_position_package.player_pointer_x.toString() + " " + player_position_package.player_pointer_y.toString(); 
+            speakOutput = requestAttributes.t('CHECKPOINT_FOUND_MESSAGE',AnswerValue,player_position_package.player_pointer_x.toString(),player_position_package.player_pointer_y.toString());
+            
         }
         else {
-            speakOutput = "No se ha encontrado el checkpoint llamado " + AnswerValue;
+            speakOutput = requestAttributes.t('CHECKPOINT_NOT_FOUND_MESSAGE',AnswerValue);
         }
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput +="." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,language) + ". Delante, hay un" + worldmodule.SymbolToString(front,language) + ". A tu izquierda, tienes un" + worldmodule.SymbolToString(left,language) + ". Detrás de ti hay un" + worldmodule.SymbolToString(behind,language);
+        speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -319,8 +355,9 @@ const InventoryIntentHandler = {
     },
     handle(handlerInput) {
         const language = handlerInput.requestEnvelope.request.locale;
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         if (CurrentWorld == null){
-            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            let speakOutput = requestAttributes.t('MISSING_WORLD_MESSAGE');
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -329,17 +366,17 @@ const InventoryIntentHandler = {
         // CODIGO
         let speakOutput;
         if (inventory_wrapper.length === 0){
-            speakOutput = "El inventario está vacio, primero consigue un objeto"
+            speakOutput = requestAttributes.t('EMPTY_INVENTORY_MESSAGE');
         }
         else {
-            speakOutput = "Tienes "
+            speakOutput = requestAttributes.t('HAVE_MESSAGE');
             for (let i = 0; i < inventory_wrapper[0].length ; i++){
                 switch(inventory_wrapper[0][i]){
                     case 'H':
-                        speakOutput += "un hacha "
+                        speakOutput += requestAttributes.t('A_HATCHET_MESSAGE');
                         break;
                     case 'B':
-                        speakOutput += "una bomba "
+                        speakOutput += requestAttributes.t('A_BOMB_MESSAGE');
                         break;
                 }
             }
@@ -360,8 +397,9 @@ const UseObjectIntentHandler = {
     },
     handle(handlerInput) {
         const language = handlerInput.requestEnvelope.request.locale;
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         if (CurrentWorld == null){
-            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            let speakOutput = requestAttributes.t('MISSING_WORLD_MESSAGE');
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -373,7 +411,7 @@ const UseObjectIntentHandler = {
 
         let speakOutput;
         if (inventory_wrapper.length === 0){
-            speakOutput = "El inventario está vacio, primero consigue un objeto"
+            speakOutput = requestAttributes.t('EMPTY_INVENTORY_MESSAGE');
             return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -393,7 +431,7 @@ const UseObjectIntentHandler = {
             }
         }
         if (object_found == true){
-            speakOutput = "¿En que direccion quieres usar el objeto? "
+            speakOutput = requestAttributes.t('USE_OBJECT_MESSAGE');
             //reprompt
 
             //rescatar direccion
@@ -401,7 +439,7 @@ const UseObjectIntentHandler = {
             //direccion valida, speak suscess
         }
         else {
-            speakOutput = "No dispones del objeto " + AnswerValue + " intentalo de nuevo."
+            speakOutput = requestAttributes.t('MISSING_OBJECT_MESSAGE',AnswerValue);
         }
         
         return handlerInput.responseBuilder
@@ -418,21 +456,29 @@ const SingleDirectionIntentHandler = {
     },
     handle(handlerInput) {
         const language = handlerInput.requestEnvelope.request.locale;
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
+        if (CurrentWorld == null){
+            let speakOutput = requestAttributes.t('MISSING_WORLD_MESSAGE');
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
         let speakOutput;
         if (object_found){
             let result = worldmodule.UseObjectDirection(AnswerValue,CurrentWorld,player_position_package,language);
             CurrentWorld = result[0];
             let success = result[1];
             if (success){
-                speakOutput = "Se ha usado el hacha para eliminar el arbusto en la direccion " + AnswerValue;
+                speakOutput = requestAttributes.t('USED_HATCHET_MESSAGE',AnswerValue);
             }
             else{
-                speakOutput = "No hay ningun arbusto en la direccion " + AnswerValue;
+                speakOutput = requestAttributes.t('NOT_A_BUSH_MESSAGE',AnswerValue);
             }
         }
         else{
-            speakOutput = "No se puede realizar dicha acción, vuelve a intentarlo"
+            speakOutput = requestAttributes.t('CANT_USE_OBJECT_MESSAGE');
         }
             return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -449,10 +495,11 @@ const PickObjectIntentHandler = {
     },
     handle(handlerInput) {
         const language = handlerInput.requestEnvelope.request.locale;
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         //quitar el valor a recibir, solo recojo objeto y ya se maneja el tipo de objeto en la propia funcion
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Object.value;
         if (CurrentWorld == null){
-            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            let speakOutput = requestAttributes.t('MISSING_WORLD_MESSAGE');
             CurrentWorld = null;
             return handlerInput.responseBuilder
                 .speak(speakOutput)
@@ -465,19 +512,19 @@ const PickObjectIntentHandler = {
         if (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H'){
                 switch(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y][0]){
                     case 'H':
-                        speakOutput = "Has encontrado un hacha, la recojes";
+                        speakOutput = requestAttributes.t('FOUND_HATCHET_MESSAGE');
                         inventory_wrapper.push(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y]);
                         break;
 
                     case 'B':
-                        speakOutput = "Has encontrado una bomba, la recojes";
+                        speakOutput = requestAttributes.t('FOUND_BOMB_MESSAGE');
                         inventory_wrapper.push(CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y]);
                         break;
                 }
                 CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y][0] = '0'
             }
         else {
-            speakOutput = "No estas sobre ningun objeto, muevete hacia la casilla donde se encuentre y vuelve a intentarlo";
+            speakOutput = requestAttributes.t('NOT_A_OBJECT_MESSAGE');
         }
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -494,8 +541,9 @@ const SituationIntentHandler = {
     },
     handle(handlerInput) {
         const language = handlerInput.requestEnvelope.request.locale;
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         if (CurrentWorld == null){
-            let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
+            let speakOutput = requestAttributes.t('MISSING_WORLD_MESSAGE');
             CurrentWorld = null;
             return handlerInput.responseBuilder
                 .speak(speakOutput)
@@ -504,7 +552,7 @@ const SituationIntentHandler = {
         }
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        let speakOutput = " A tu derecha tienes un" + worldmodule.SymbolToString(right,language) + ". Delante hay un" + worldmodule.SymbolToString(front,language) + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left,language) + ". Detrás de ti hay un" + worldmodule.SymbolToString(behind);
+        speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -518,7 +566,8 @@ const HelpIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Oigo tu súplica, ¿cómo puedo guiar tu camino?';
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const speakOutput = requestAttributes.t('HELP_MESSAGE');
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -535,7 +584,8 @@ const CancelAndStopIntentHandler = {
     },
     
     handle(handlerInput) {
-        const speakOutput = 'Te has rendido ante el laberinto.';
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const speakOutput = requestAttributes.t('CANCEL_MESSAGE');
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -553,7 +603,8 @@ const FallbackIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Tu voz se pierde tras los muros. ¿Puedes repetir tus palabras?';
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const speakOutput = requestAttributes.t('FALLBACK_MESSAGE');
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -587,7 +638,9 @@ const IntentReflectorHandler = {
     },
     handle(handlerInput) {
         const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speakOutput = `Has activado ${intentName}`;
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        let dummy = `${intentName}`;
+        const speakOutput = requestAttributes.t('REFLECTOR_MESSAGE',dummy);
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -605,7 +658,8 @@ const ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        const speakOutput = 'No he podido acatar tu orden. Si me lo pides de nuevo, volveré a intentarlo.';
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const speakOutput = requestAttributes.t('ERROR_MESSAGE');
         console.log(`~~~~ Error handled: ${JSON.stringify(error)}`);
 
         return handlerInput.responseBuilder
