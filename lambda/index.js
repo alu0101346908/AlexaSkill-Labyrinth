@@ -581,6 +581,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         PickObjectIntentHandler,
         SingleDirectionIntentHandler,
         SituationIntentHandler,
+        RestartWorldIntentHandler,
         InventoryIntentHandler,
         HelpIntentHandler,
         ReturnToCheckpointIntentHandler,
