@@ -171,7 +171,7 @@ const AnswerDirectionIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerDirectionsIntent';
-    },muro
+    },
     handle(handlerInput) {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         if (CurrentWorld == null){
@@ -182,7 +182,7 @@ const AnswerDirectionIntentHandler = {
                 .getResponse();
         }
         let speakOutput
-        let direction_wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package);
+        let direction_wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package,'es');
         CurrentWorld = direction_wrapper[0];
         player_position_package = direction_wrapper[1];
         if (direction_wrapper[2]){
@@ -382,7 +382,7 @@ const SingleDirectionIntentHandler = {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         let speakOutput;
         if (object_found){
-            let result = worldmodule.UseObjectDirection(AnswerValue,CurrentWorld,player_position_package);
+            let result = worldmodule.UseObjectDirection(AnswerValue,CurrentWorld,player_position_package,'es');
             CurrentWorld = result[0];
             let success = result[1];
             if (success){
