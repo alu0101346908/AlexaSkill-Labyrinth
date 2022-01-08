@@ -54,7 +54,7 @@ const languageStrings = {
       REACHED_GOAL_MESSAGE: '¡Felicidades has llegado a la meta! El laberinto se va a autodestruir.',
       CANT_MOVE_MESSAGE: 'No te puede mover hacia %s porque hay un muro',
       MOVE_MESSAGE: 'Te mueves hacia %s',
-      RESTART_LABYRINTH: 'Se ha creado un nuevo laberinto. Entras en el laberinto',
+      RESTART_LABYRINTH_MESSAGE: 'Se ha creado un nuevo laberinto. Entras en el laberinto',
       UNSUPPORTED_SIZE_MESSAGE: 'Tamaño de mundo no soportado, prueba con pequeño, mediano y grande',
       PLAYER_SURROUNDINGS_START_MESSAGE: '. A tu derecha tienes un %s. Delante, tienes un %s. A tu izquierda, hay un %s. Detrás de ti está la entrada.',
       LABYRINTH_HELP_MESSAGE: 'Oigo tu súplica, ¿cómo puedo guiar tu camino?',
@@ -162,7 +162,7 @@ const NewWorldIntentHandler = {
         //let speakOutput = requestAttributes.t('ENTER_LABYRINTH');
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        let dummy_string1 = requestAttributes.t('ENTER_LABYRINTH');
+        let dummy_string1 = requestAttributes.t('ENTER_LABYRINTH_MESSAGE');
         let dummy_string2 = requestAttributes.t('PLAYER_SURROUNDINGS_START_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language));
         let speakOutput = dummy_string1 + dummy_string2;
         return handlerInput.responseBuilder
@@ -225,7 +225,7 @@ const RestartWorldIntentHandler = {
         //let speakOutput = requestAttributes.t('RESTART_LABYRINTH');
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        let speakOutput = requestAttributes.t('RESTART_LABYRINTH'+'PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
+        let speakOutput = requestAttributes.t('RESTART_LABYRINTH_MESSAGE'+'PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
