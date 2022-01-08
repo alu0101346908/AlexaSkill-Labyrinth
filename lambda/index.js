@@ -115,6 +115,7 @@ const RestartWorldIntentHandler = {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
         let count = 0;
         let countobstacle = 0;
+        CurrentWorld = null
         switch (AnswerValue){
             case 'pequeño':
                 CurrentWorld = worldmodule.World(4,4);
