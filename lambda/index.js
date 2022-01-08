@@ -169,7 +169,7 @@ const AnswerDirectionIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerDirectionsIntent';
-    },
+    },muro
     handle(handlerInput) {
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         if (CurrentWorld == null){
