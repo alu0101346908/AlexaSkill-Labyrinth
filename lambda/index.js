@@ -62,7 +62,6 @@ let player_position_package = { player_pointer_x, player_pointer_y, player_orien
 let worldmodule = require ("./world.js");
 let playermodule = require ("./player.js");
 
-
 let checkpoint_wrapper = [];
 
 let inventory_wrapper = [];
@@ -75,6 +74,7 @@ const NewWorldIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NewWorldIntent';
     },
     handle(handlerInput) {
+        const language = handlerInput.requestEnvelope.request.locale;
         if (CurrentWorld !== null && tryagain == false){
             const speakOutput = 'Ya existe un mundo, si quieres reiniciar di reinicia mundo, si quieres crear uno nuevo vuelve a decir crea mundo';
             tryagain = true;
@@ -131,8 +131,7 @@ const NewWorldIntentHandler = {
         let speakOutput = "Entras en el laberinto";
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,'es') + ". Delante, tienes un" + worldmodule.SymbolToString(front,'es') + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left,'es') + ". Detrás de ti está la entrada.";
-        speakOutput = handlerInput.requestEnvelope.request.locale;
+        speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,language) + ". Delante, tienes un" + worldmodule.SymbolToString(front,language) + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left,language) + ". Detrás de ti está la entrada.";
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -147,6 +146,7 @@ const RestartWorldIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RestartWorldIntent';
     },
     handle(handlerInput) {
+        const language = handlerInput.requestEnvelope.request.locale;
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Size.value;
         let count = 0;
         let countobstacle = 0;
@@ -191,7 +191,7 @@ const RestartWorldIntentHandler = {
         let speakOutput = "Se ha creado un nuevo laberinto. Entras en el laberinto";
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,'es') + ". Delante, tienes un" + worldmodule.SymbolToString(front,'es') + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left,'es') + ". Detrás de ti está la entrada.";
+        speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,language) + ". Delante, tienes un" + worldmodule.SymbolToString(front,language) + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left,language) + ". Detrás de ti está la entrada.";
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -206,6 +206,7 @@ const AnswerDirectionIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerDirectionsIntent';
     },
     handle(handlerInput) {
+        const language = handlerInput.requestEnvelope.request.locale;
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
@@ -215,7 +216,7 @@ const AnswerDirectionIntentHandler = {
                 .getResponse();
         }
         let speakOutput
-        let direction_wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package,'es');
+        let direction_wrapper = worldmodule.ManageDirection(AnswerValue,CurrentWorld,player_position_package,language);
         CurrentWorld = direction_wrapper[0];
         player_position_package = direction_wrapper[1];
         if (direction_wrapper[2]){
@@ -236,7 +237,7 @@ const AnswerDirectionIntentHandler = {
         if (CurrentWorld[player_position_package.player_pointer_x][player_position_package.player_pointer_y] == 'H'){
             speakOutput += "." + " Te encuentras encima de un objeto"
         }
-        speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,'es') + ". Delante hay un" + worldmodule.SymbolToString(front,'es') + ". A tu izquierda, un" + worldmodule.SymbolToString(left,'es') + ". Detrás de ti, hay un" + worldmodule.SymbolToString(behind,'es')
+        speakOutput += "." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,language) + ". Delante hay un" + worldmodule.SymbolToString(front,language) + ". A tu izquierda, un" + worldmodule.SymbolToString(left,language) + ". Detrás de ti, hay un" + worldmodule.SymbolToString(behind,language)
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -252,6 +253,7 @@ const PutCheckpointIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PutCheckpointIntent';
     },
     handle(handlerInput) {
+        const language = handlerInput.requestEnvelope.request.locale;
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
@@ -277,6 +279,7 @@ const ReturnToCheckpointIntentHandler = {
     },
     handle(handlerInput) {
         let found_checkpoint = false;
+        const language = handlerInput.requestEnvelope.request.locale;
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Query.value;
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
@@ -301,7 +304,7 @@ const ReturnToCheckpointIntentHandler = {
         }
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        speakOutput +="." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,'es') + ". Delante, hay un" + worldmodule.SymbolToString(front,'es') + ". A tu izquierda, tienes un" + worldmodule.SymbolToString(left,'es') + ". Detrás de ti hay un" + worldmodule.SymbolToString(behind,'es');
+        speakOutput +="." + " A tu derecha tienes un" + worldmodule.SymbolToString(right,language) + ". Delante, hay un" + worldmodule.SymbolToString(front,language) + ". A tu izquierda, tienes un" + worldmodule.SymbolToString(left,language) + ". Detrás de ti hay un" + worldmodule.SymbolToString(behind,language);
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -315,6 +318,7 @@ const InventoryIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'InventoryIntent';
     },
     handle(handlerInput) {
+        const language = handlerInput.requestEnvelope.request.locale;
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
             return handlerInput.responseBuilder
@@ -355,6 +359,7 @@ const UseObjectIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'UseObjectIntent';
     },
     handle(handlerInput) {
+        const language = handlerInput.requestEnvelope.request.locale;
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
             return handlerInput.responseBuilder
@@ -412,10 +417,11 @@ const SingleDirectionIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SingleDirectionIntent';
     },
     handle(handlerInput) {
+        const language = handlerInput.requestEnvelope.request.locale;
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Direction.value;
         let speakOutput;
         if (object_found){
-            let result = worldmodule.UseObjectDirection(AnswerValue,CurrentWorld,player_position_package,'es');
+            let result = worldmodule.UseObjectDirection(AnswerValue,CurrentWorld,player_position_package,language);
             CurrentWorld = result[0];
             let success = result[1];
             if (success){
@@ -442,6 +448,7 @@ const PickObjectIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PickObjectIntent';
     },
     handle(handlerInput) {
+        const language = handlerInput.requestEnvelope.request.locale;
         //quitar el valor a recibir, solo recojo objeto y ya se maneja el tipo de objeto en la propia funcion
         const AnswerValue = handlerInput.requestEnvelope.request.intent.slots.Object.value;
         if (CurrentWorld == null){
@@ -486,6 +493,7 @@ const SituationIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SituationIntent';
     },
     handle(handlerInput) {
+        const language = handlerInput.requestEnvelope.request.locale;
         if (CurrentWorld == null){
             let speakOutput = "No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande";
             CurrentWorld = null;
@@ -496,7 +504,7 @@ const SituationIntentHandler = {
         }
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
-        let speakOutput = " A tu derecha tienes un" + worldmodule.SymbolToString(right,'es') + ". Delante hay un" + worldmodule.SymbolToString(front,'es') + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left,'es') + ". Detrás de ti hay un" + worldmodule.SymbolToString(behind);
+        let speakOutput = " A tu derecha tienes un" + worldmodule.SymbolToString(right,language) + ". Delante hay un" + worldmodule.SymbolToString(front,language) + ". A tu izquierda, hay un" + worldmodule.SymbolToString(left,language) + ". Detrás de ti hay un" + worldmodule.SymbolToString(behind);
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
