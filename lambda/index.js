@@ -32,7 +32,7 @@ const languageStrings = {
       HELLO_MESSAGE: 'Hola Mundo!',
       WORLD_EXIST_MESSAGE: 'Ya existe un mundo, si quieres reiniciar di reinicia mundo, si quieres crear uno nuevo vuelve a decir crea mundo',
       HELP_MESSAGE: 'Puedes decirme hola. Cómo te puedo ayudar?',
-      ENTER_LABERYNTH_MESSAGE: 'Entras en el laberinto',
+      ENTER_LABYRINTH_MESSAGE: 'Entras en el laberinto',
       MISSING_WORLD_MESSAGE : 'No existe laberinto, crea uno antes de empezar diciendo crea mundo pequeño, mediano o grande',
       NOT_A_OBJECT_MESSAGE: 'No estas sobre ningun objeto, muevete hacia la casilla donde se encuentre y vuelve a intentarlo',
       FOUND_BOMB_MESSAGE: 'Has encontrado una bomba, la recojes',
@@ -54,10 +54,10 @@ const languageStrings = {
       REACHED_GOAL_MESSAGE: '¡Felicidades has llegado a la meta! El laberinto se va a autodestruir.',
       CANT_MOVE_MESSAGE: 'No te puede mover hacia %s porque hay un muro',
       MOVE_MESSAGE: 'Te mueves hacia %s',
-      RESTART_LABERYNTH: 'Se ha creado un nuevo laberinto. Entras en el laberinto',
+      RESTART_LABYRINTH: 'Se ha creado un nuevo laberinto. Entras en el laberinto',
       UNSUPPORTED_SIZE_MESSAGE: 'Tamaño de mundo no soportado, prueba con pequeño, mediano y grande',
       PLAYER_SURROUNDINGS_START_MESSAGE: '. A tu derecha tienes un %s. Delante, tienes un %s. A tu izquierda, hay un %s. Detrás de ti está la entrada.',
-      LABERYNTH_HELP_MESSAGE: 'Oigo tu súplica, ¿cómo puedo guiar tu camino?',
+      LABYRINTH_HELP_MESSAGE: 'Oigo tu súplica, ¿cómo puedo guiar tu camino?',
       GOODBYE_MESSAGE: 'Adiós!',
       REFLECTOR_MESSAGE: 'Acabas de activar %s',
       CANCEL_MESSAGE: 'Te has rendido ante el laberinto.',
@@ -159,7 +159,7 @@ const NewWorldIntentHandler = {
         }
         let contador = count.toString();
         //let speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
-        let speakOutput = requestAttributes.t('ENTER_LABERYNTH');
+        let speakOutput = requestAttributes.t('ENTER_LABYRINTH');
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
         speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_START_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language));
@@ -220,7 +220,7 @@ const RestartWorldIntentHandler = {
         }
         let contador = count.toString();
         //let speakOutput = 'Creando ' + AnswerValue + ' con ' + contador + ' casillas' + ' y obstaculos ' + countobstacle;
-        let speakOutput = requestAttributes.t('RESTART_LABERYNTH');
+        let speakOutput = requestAttributes.t('RESTART_LABYRINTH');
         let wrapper = worldmodule.Surroundings(CurrentWorld,player_position_package);
         let left = wrapper[0], right = wrapper[1], front = wrapper[2], behind = wrapper[3];
         speakOutput += requestAttributes.t('PLAYER_SURROUNDINGS_MESSAGE',worldmodule.SymbolToString(right,language),worldmodule.SymbolToString(front,language),worldmodule.SymbolToString(left,language),worldmodule.SymbolToString(behind,language));
